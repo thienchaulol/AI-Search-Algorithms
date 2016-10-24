@@ -9,7 +9,8 @@
 using namespace std;
 
 //UCS search on root node x
-//GETS KILLED ON COMPLEX 8 PUZZLES
+//UCS is done. UCS program is killed when traversing complex puzzles
+//but that is the nature of it, it is a long search algorithmm.
 void uniformCostSearch(node* &x, node* goal){
 	vector< vector<double> > solvableCase;
 	solvableCase.resize(numCol, vector<double> (numRow, 0));
