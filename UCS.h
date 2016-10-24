@@ -72,212 +72,284 @@ void uniformCostSearch(node* &x, node* goal){
 			popLater = true;
 		}
 
-		//do not create duplicate puzzles
+		//do not create duplicate puzzles and avoid back and forth moves
 		if(emptyTileRow == 0 && emptyTileCol == 0 && checkpoint == false){
 			//swapRight node and push onto queue
-			node* temp1 = new node;
-			temp1->puzzle = Q.front()->puzzle;
-			swap(temp1->puzzle.at(emptyTileRow).at(emptyTileCol), temp1->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp1;
-			temp1->parent = Q.front();
-			Q.push(temp1);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp1 = new node;
+				temp1->puzzle = Q.front()->puzzle;
+				swap(temp1->puzzle.at(emptyTileRow).at(emptyTileCol), temp1->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp1;
+				temp1->parent = Q.front();
+				temp1->swapMove = "swapRight";
+				Q.push(temp1);
+			}
 			//swapBot node and push on to queue
-			node* temp2 = new node;
-			temp2->puzzle = Q.front()->puzzle;
-			swap(temp2->puzzle.at(emptyTileRow).at(emptyTileCol), temp2->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp2;
-			temp2->parent = Q.front();
-			Q.push(temp2);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp2 = new node;
+				temp2->puzzle = Q.front()->puzzle;
+				swap(temp2->puzzle.at(emptyTileRow).at(emptyTileCol), temp2->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp2;
+				temp2->parent = Q.front();
+				temp2->swapMove = "swapBot";
+				Q.push(temp2);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 1 && checkpoint == false){
 			//swapLeft node and push onto queue
-			node* temp3 = new node;
-			temp3->puzzle = Q.front()->puzzle;
-			swap(temp3->puzzle.at(emptyTileRow).at(emptyTileCol), temp3->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-			Q.front()->swapLeft = temp3;
-			temp3->parent = Q.front();
-			Q.push(temp3);
+			if(Q.front()->swapMove != "swapRight"){
+				node* temp3 = new node;
+				temp3->puzzle = Q.front()->puzzle;
+				swap(temp3->puzzle.at(emptyTileRow).at(emptyTileCol), temp3->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+				Q.front()->swapLeft = temp3;
+				temp3->parent = Q.front();
+				temp3->swapMove = "swapLeft";
+				Q.push(temp3);
+			}
 			//swapRight node and push onto queue
-			node* temp4 = new node;
-			temp4->puzzle = Q.front()->puzzle;
-			swap(temp4->puzzle.at(emptyTileRow).at(emptyTileCol), temp4->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp4;
-			temp4->parent = Q.front();
-			Q.push(temp4);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp4 = new node;
+				temp4->puzzle = Q.front()->puzzle;
+				swap(temp4->puzzle.at(emptyTileRow).at(emptyTileCol), temp4->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp4;
+				temp4->parent = Q.front();
+				temp4->swapMove = "swapRight";
+				Q.push(temp4);
+			}
 			//swapBot node and push on to queue
-			node* temp5 = new node;
-			temp5->puzzle = Q.front()->puzzle;
-			swap(temp5->puzzle.at(emptyTileRow).at(emptyTileCol), temp5->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp5;
-			temp5->parent = Q.front();
-			Q.push(temp5);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp5 = new node;
+				temp5->puzzle = Q.front()->puzzle;
+				swap(temp5->puzzle.at(emptyTileRow).at(emptyTileCol), temp5->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp5;
+				temp5->parent = Q.front();
+				temp5->swapMove = "swapBot";
+				Q.push(temp5);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 2 && checkpoint == false){
 			//swapLeft node and push onto queue
-			node* temp6 = new node;
-			temp6->puzzle = Q.front()->puzzle;
-			swap(temp6->puzzle.at(emptyTileRow).at(emptyTileCol), temp6->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-			Q.front()->swapLeft = temp6;
-			temp6->parent = Q.front();
-			Q.push(temp6);
+			if(Q.front()->swapMove != "swapRight"){
+				node* temp6 = new node;
+				temp6->puzzle = Q.front()->puzzle;
+				swap(temp6->puzzle.at(emptyTileRow).at(emptyTileCol), temp6->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+				Q.front()->swapLeft = temp6;
+				temp6->parent = Q.front();
+				temp6->swapMove = "swapLeft";
+				Q.push(temp6);
+			}
 			//swapBot node and push on to queue
-			node* temp7 = new node;
-			temp7->puzzle = Q.front()->puzzle;
-			swap(temp7->puzzle.at(emptyTileRow).at(emptyTileCol), temp7->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp7;
-			temp7->parent = Q.front();
-			Q.push(temp7);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp7 = new node;
+				temp7->puzzle = Q.front()->puzzle;
+				swap(temp7->puzzle.at(emptyTileRow).at(emptyTileCol), temp7->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp7;
+				temp7->parent = Q.front();
+				temp7->swapMove = "swapBot";
+				Q.push(temp7);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 0){
 			//swapTop node and push on to queue
 			if(checkpoint == false){
-				node* temp8 = new node;
-				temp8->puzzle = Q.front()->puzzle;
-				swap(temp8->puzzle.at(emptyTileRow).at(emptyTileCol), temp8->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-				Q.front()->swapTop = temp8;
-				temp8->parent = Q.front();
-				Q.push(temp8);
+				if(Q.front()->swapMove != "swapBot"){
+					node* temp8 = new node;
+					temp8->puzzle = Q.front()->puzzle;
+					swap(temp8->puzzle.at(emptyTileRow).at(emptyTileCol), temp8->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+					Q.front()->swapTop = temp8;
+					temp8->parent = Q.front();
+					temp8->swapMove = "swapTop";
+					Q.push(temp8);
+				}
 			}
 			//swapBot node and push on to queue
-			node* temp9 = new node;
-			temp9->puzzle = Q.front()->puzzle;
-			swap(temp9->puzzle.at(emptyTileRow).at(emptyTileCol), temp9->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp9;
-			temp9->parent = Q.front();
-			Q.push(temp9);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp9 = new node;
+				temp9->puzzle = Q.front()->puzzle;
+				swap(temp9->puzzle.at(emptyTileRow).at(emptyTileCol), temp9->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp9;
+				temp9->parent = Q.front();
+				temp9->swapMove = "swapBot";
+				Q.push(temp9);
+			}
 			//swapRight node and push onto queue
-			node* temp10 = new node;
-			temp10->puzzle = Q.front()->puzzle;
-			swap(temp10->puzzle.at(emptyTileRow).at(emptyTileCol), temp10->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp10;
-			temp10->parent = Q.front();
-			Q.push(temp10);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp10 = new node;
+				temp10->puzzle = Q.front()->puzzle;
+				swap(temp10->puzzle.at(emptyTileRow).at(emptyTileCol), temp10->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp10;
+				temp10->parent = Q.front();
+				temp10->swapMove = "swapRight";
+				Q.push(temp10);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 1){
 			//swapTop node and push on to queue
 			if(checkpoint == false){
-				node* temp11 = new node;
-				temp11->puzzle = Q.front()->puzzle;
-				swap(temp11->puzzle.at(emptyTileRow).at(emptyTileCol), temp11->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-				Q.front()->swapTop = temp11;
-				temp11->parent = Q.front();
-				Q.push(temp11);
+				if(Q.front()->swapMove != "swapBot"){
+					node* temp11 = new node;
+					temp11->puzzle = Q.front()->puzzle;
+					swap(temp11->puzzle.at(emptyTileRow).at(emptyTileCol), temp11->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+					Q.front()->swapTop = temp11;
+					temp11->parent = Q.front();
+					temp11->swapMove = "swapTop";
+					Q.push(temp11);
+				}
 			}
 			//swapBot node and push on to queue
-			node* temp12 = new node;
-			temp12->puzzle = Q.front()->puzzle;
-			swap(temp12->puzzle.at(emptyTileRow).at(emptyTileCol), temp12->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp12;
-			temp12->parent = Q.front();
-			Q.push(temp12);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp12 = new node;
+				temp12->puzzle = Q.front()->puzzle;
+				swap(temp12->puzzle.at(emptyTileRow).at(emptyTileCol), temp12->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp12;
+				temp12->parent = Q.front();
+				temp12->swapMove = "swapBot";
+				Q.push(temp12);
+			}
 			//swapRight node and push onto queue
-			node* temp13 = new node;
-			temp13->puzzle = Q.front()->puzzle;
-			swap(temp13->puzzle.at(emptyTileRow).at(emptyTileCol), temp13->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp13;
-			temp13->parent = Q.front();
-			Q.push(temp13);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp13 = new node;
+				temp13->puzzle = Q.front()->puzzle;
+				swap(temp13->puzzle.at(emptyTileRow).at(emptyTileCol), temp13->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp13;
+				temp13->parent = Q.front();
+				temp13->swapMove = "swapRight";
+				Q.push(temp13);
+			}
 			//swapLeft node and push onto queue
 			if(checkpoint2 == false){
-				node* temp14 = new node;
-				temp14->puzzle = Q.front()->puzzle;
-				swap(temp14->puzzle.at(emptyTileRow).at(emptyTileCol), temp14->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-				Q.front()->swapLeft = temp14;
-				temp14->parent = Q.front();
-				Q.push(temp14);
+				if(Q.front()->swapMove != "swapRight"){
+					node* temp14 = new node;
+					temp14->puzzle = Q.front()->puzzle;
+					swap(temp14->puzzle.at(emptyTileRow).at(emptyTileCol), temp14->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+					Q.front()->swapLeft = temp14;
+					temp14->parent = Q.front();
+					temp14->swapMove = "swapLeft";
+					Q.push(temp14);
+				}
 			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 2){
 			//swapTop node and push on to queue
 			if(checkpoint == false){
-				node* temp15 = new node;
-				temp15->puzzle = Q.front()->puzzle;
-				swap(temp15->puzzle.at(emptyTileRow).at(emptyTileCol), temp15->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-				Q.front()->swapTop = temp15;
-				temp15->parent = Q.front();
-				Q.push(temp15);
+				if(Q.front()->swapMove != "swapBot"){
+					node* temp15 = new node;
+					temp15->puzzle = Q.front()->puzzle;
+					swap(temp15->puzzle.at(emptyTileRow).at(emptyTileCol), temp15->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+					Q.front()->swapTop = temp15;
+					temp15->parent = Q.front();
+					temp15->swapMove = "swapTop";
+					Q.push(temp15);
+				}
 			}
 			//swapBot node and push on to queue
-			node* temp16 = new node;
-			temp16->puzzle = Q.front()->puzzle;
-			swap(temp16->puzzle.at(emptyTileRow).at(emptyTileCol), temp16->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
-			Q.front()->swapBot = temp16;
-			temp16->parent = Q.front();
-			Q.push(temp16);
+			if(Q.front()->swapMove != "swapTop"){
+				node* temp16 = new node;
+				temp16->puzzle = Q.front()->puzzle;
+				swap(temp16->puzzle.at(emptyTileRow).at(emptyTileCol), temp16->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
+				Q.front()->swapBot = temp16;
+				temp16->parent = Q.front();
+				temp16->swapMove = "swapBot";
+				Q.push(temp16);
+			}
 			//swapLeft node and push onto queue
-			node* temp17 = new node;
-			temp17->puzzle = Q.front()->puzzle;
-			swap(temp17->puzzle.at(emptyTileRow).at(emptyTileCol), temp17->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-			Q.front()->swapLeft = temp17;
-			temp17->parent = Q.front();
-			Q.push(temp17);
+			if(Q.front()->swapMove != "swapRight"){
+				node* temp17 = new node;
+				temp17->puzzle = Q.front()->puzzle;
+				swap(temp17->puzzle.at(emptyTileRow).at(emptyTileCol), temp17->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+				Q.front()->swapLeft = temp17;
+				temp17->parent = Q.front();
+				temp17->swapMove = "swapLeft";
+				Q.push(temp17);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 0){
 			//swapTop node and push on to queue
 			if(checkpoint2 == false){
-				node* temp18 = new node;
-				temp18->puzzle = Q.front()->puzzle;
-				swap(temp18->puzzle.at(emptyTileRow).at(emptyTileCol), temp18->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-				Q.front()->swapTop = temp18;
-				temp18->parent = Q.front();
-				Q.push(temp18);
+				if(Q.front()->swapMove != "swapBot"){
+					node* temp18 = new node;
+					temp18->puzzle = Q.front()->puzzle;
+					swap(temp18->puzzle.at(emptyTileRow).at(emptyTileCol), temp18->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+					Q.front()->swapTop = temp18;
+					temp18->parent = Q.front();
+					temp18->swapMove = "swapTop";
+					Q.push(temp18);
+				}
 			}
 			//swapRight node and push onto queue
-			node* temp19 = new node;
-			temp19->puzzle = Q.front()->puzzle;
-			swap(temp19->puzzle.at(emptyTileRow).at(emptyTileCol), temp19->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp19;
-			temp19->parent = Q.front();
-			Q.push(temp19);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp19 = new node;
+				temp19->puzzle = Q.front()->puzzle;
+				swap(temp19->puzzle.at(emptyTileRow).at(emptyTileCol), temp19->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp19;
+				temp19->parent = Q.front();
+				temp19->swapMove = "swapRight";
+				Q.push(temp19);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 1){
 			//swapTop node and push on to queue
-			node* temp20 = new node;
-			temp20->puzzle = Q.front()->puzzle;
-			swap(temp20->puzzle.at(emptyTileRow).at(emptyTileCol), temp20->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-			Q.front()->swapTop = temp20;
-			temp20->parent = Q.front();
-			Q.push(temp20);
+			if(Q.front()->swapMove != "swapBot"){
+				node* temp20 = new node;
+				temp20->puzzle = Q.front()->puzzle;
+				swap(temp20->puzzle.at(emptyTileRow).at(emptyTileCol), temp20->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+				Q.front()->swapTop = temp20;
+				temp20->parent = Q.front();
+				temp20->swapMove = "swapTop";
+				Q.push(temp20);
+			}
 			//swapRight node and push onto queue
-			node* temp21 = new node;
-			temp21->puzzle = Q.front()->puzzle;
-			swap(temp21->puzzle.at(emptyTileRow).at(emptyTileCol), temp21->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
-			Q.front()->swapRight = temp21;
-			temp21->parent = Q.front();
-			Q.push(temp21);
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp21 = new node;
+				temp21->puzzle = Q.front()->puzzle;
+				swap(temp21->puzzle.at(emptyTileRow).at(emptyTileCol), temp21->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp21;
+				temp21->parent = Q.front();
+				temp21->swapMove = "swapRight";
+				Q.push(temp21);
+			}
 			//swapLeft node and push onto queue
 			if(checkpoint3 == false){
-				node* temp22 = new node;
-				temp22->puzzle = Q.front()->puzzle;
-				swap(temp22->puzzle.at(emptyTileRow).at(emptyTileCol), temp22->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-				Q.front()->swapLeft = temp22;
-				temp22->parent = Q.front();
-				Q.push(temp22);
+				if(Q.front()->swapMove != "swapRight"){
+					node* temp22 = new node;
+					temp22->puzzle = Q.front()->puzzle;
+					swap(temp22->puzzle.at(emptyTileRow).at(emptyTileCol), temp22->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+					Q.front()->swapLeft = temp22;
+					temp22->parent = Q.front();
+					temp22->swapMove = "swapLeft";
+					Q.push(temp22);
+				}
 			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 2){
 			//swapLeft node and push onto queue
-			node* temp23 = new node;
-			temp23->puzzle = Q.front()->puzzle;
-			swap(temp23->puzzle.at(emptyTileRow).at(emptyTileCol), temp23->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
-			Q.front()->swapLeft = temp23;
-			temp23->parent = Q.front();
-			Q.push(temp23);
+			if(Q.front()->swapMove != "swapRight"){
+				node* temp23 = new node;
+				temp23->puzzle = Q.front()->puzzle;
+				swap(temp23->puzzle.at(emptyTileRow).at(emptyTileCol), temp23->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
+				Q.front()->swapLeft = temp23;
+				temp23->parent = Q.front();
+				temp23->swapMove = "swapLeft";
+				Q.push(temp23);
+			}
 			//swapTop node and push on to queue
-			node* temp24 = new node;
-			temp24->puzzle = Q.front()->puzzle;
-			swap(temp24->puzzle.at(emptyTileRow).at(emptyTileCol), temp24->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
-			Q.front()->swapTop = temp24;
-			temp24->parent = Q.front();
-			Q.push(temp24);
+			if(Q.front()->swapMove != "swapBot"){
+				node* temp24 = new node;
+				temp24->puzzle = Q.front()->puzzle;
+				swap(temp24->puzzle.at(emptyTileRow).at(emptyTileCol), temp24->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
+				Q.front()->swapTop = temp24;
+				temp24->parent = Q.front();
+				temp24->swapMove = "swapTop";
+				Q.push(temp24);
+			}
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(popLater){

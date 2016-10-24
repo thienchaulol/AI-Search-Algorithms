@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <stdlib.h>
-
+#include <iostream>
 
 //puzzle specifications
 int numRow = 3;
@@ -21,6 +21,12 @@ struct node{
 	node* swapBot = 0;
 	//node pointer to point back to parent
 	node* parent = NULL;
+	//string to know what move parent made
+	//when creating child's children, do not create a child
+	//that would be the opposite of the parent's parent's move.
+	//when you swap left, set swapMove = left
+	//in the next iteration, when creating children, if swapMove == "left", do not create a swapRight child node
+	string swapMove = "";
 };
 
 
