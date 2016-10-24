@@ -13,12 +13,13 @@ using namespace std;
 struct node{
 	vector< vector<double> > puzzle;
 	//node pointers used to create new nodes
-	node* swapLeft;
-	node* swapRight;
-	node* swapTop;
-	node* swapBot;
+	node* swapLeft = 0;
+	node* swapRight = 0;
+	node* swapTop = 0;
+	node* swapBot = 0;
 	//node pointer to point back to parent
 	node* parent;
 };
 
 #endif
+

@@ -27,7 +27,6 @@ void uniformCostSearch(node* &x, node* goal){
 	//children(s) are equal to goal state. if not, enqueue children's
 	//children then dequeue original children.
 	Q.push(x);
-	x->parent = NULL;
 	
 	//traverse "tree" by creating nodes that are potential moves
 	//if potential state == goal state, exit
@@ -282,6 +281,7 @@ void uniformCostSearch(node* &x, node* goal){
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(popLater){
+			delete Q.front();
 			Q.pop();
 		}
 	}

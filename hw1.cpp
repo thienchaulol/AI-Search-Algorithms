@@ -39,6 +39,7 @@ int main(){
 	//root node
 	node* n;
 	n = new node;
+	n->parent = NULL;
 
 	//initialize default/user puzzle
 	vector< vector<double> > eightPuzzle;
