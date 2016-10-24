@@ -2,6 +2,8 @@
 #define TREENODE_H_INCLUDED
 
 #include <vector>
+#include <stdlib.h>
+
 
 //puzzle specifications
 int numRow = 3;
@@ -18,7 +20,7 @@ struct node{
 	node* swapTop = 0;
 	node* swapBot = 0;
 	//node pointer to point back to parent
-	node* parent;
+	node* parent = NULL;
 };
 
 #endif

@@ -113,7 +113,7 @@ int main(){
 //	if(userChoice == 3); //perform A* with the Manhattan distance heuristic on root node n
 
 	//display solution
-	//displayPath(n);
+	displayPath(n);
 	return 0;
 }
 

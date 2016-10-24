@@ -281,7 +281,6 @@ void uniformCostSearch(node* &x, node* goal){
 			//push node onto end of queue after linking nodes to their parent's
 		}
 		if(popLater){
-			delete Q.front();
 			Q.pop();
 		}
 	}
