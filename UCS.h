@@ -11,6 +11,21 @@ using namespace std;
 //UCS search on root node x
 //GETS KILLED ON COMPLEX 8 PUZZLES
 void uniformCostSearch(node* &x, node* goal){
+	vector< vector<double> > solvableCase;
+	solvableCase.resize(numCol, vector<double> (numRow, 0));
+	
+	solvableCase.at(0).at(0) = 1;
+	solvableCase.at(0).at(1) = 2;
+	solvableCase.at(0).at(2) = 3;
+
+	solvableCase.at(1).at(0) = 4;
+	solvableCase.at(1).at(1) = 5;
+	solvableCase.at(1).at(2) = 6;
+
+	solvableCase.at(2).at(0) = 7;
+	solvableCase.at(2).at(1) = 0;
+	solvableCase.at(2).at(2) = 8;
+	
 	//check if user puzzle is equal to goal puzzle
 	if(x->puzzle == goal->puzzle){
 		cout << "puzzles are equal; return\n";
@@ -37,7 +52,11 @@ void uniformCostSearch(node* &x, node* goal){
 	bool checkpoint = false;
 	bool checkpoint2 = false;
 	bool checkpoint3 = false;
-	while(!Q.empty() /*&& x->puzzle != goal->puzzle*/){	
+	while(!Q.empty() /*&& x->puzzle != goal->puzzle*/){
+		if(solvable(Q.front()) == false){
+			cout << "Error: Puzzle is not solvable" << endl;
+			return;
+		}
 		//find front node's empty tile, store row/column value
 		//create nodes of swappable states. use swap()
 		for(int i = 0; i < numRow; i++){
@@ -67,6 +86,19 @@ void uniformCostSearch(node* &x, node* goal){
 			cout << "PUZZLE FOUND; exit" << endl;
 			x = Q.front();	//set original node to solution node
 			return;
+		} else if(Q.front()->puzzle == solvableCase){
+			cout << "Puzzle FOUND; exit2" << endl;
+			if(Q.front()->swapMove != "swapLeft"){
+				node* temp21 = new node;
+				temp21->puzzle = Q.front()->puzzle;
+				swap(temp21->puzzle.at(emptyTileRow).at(emptyTileCol), temp21->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
+				Q.front()->swapRight = temp21;
+				temp21->parent = Q.front();
+				temp21->swapMove = "swapRight";
+				Q.push(temp21);
+				x = temp21;
+				return;
+			}
 		}
 		else{
 			popLater = true;

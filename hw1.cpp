@@ -71,20 +71,20 @@ int main(){
 		n->puzzle = eightPuzzle;
 	}
 	if(userChoice == 1){
-		cout << "Enter the elements for row 1, use space between numbers: 1 2 3\n";
-		cout << "Enter the elements for row 2, use space between numbers: 4 0 6\n";
-		cout << "Enter the elements for row 3, use space between numbers: 7 5 8\n";
-		eightPuzzle.at(0).at(0) = 1;
+		cout << "Enter the elements for row 1, use space between numbers: 4 2 8\n";
+		cout << "Enter the elements for row 2, use space between numbers: 6 0 3\n";
+		cout << "Enter the elements for row 3, use space between numbers: 7 5 1\n";
+		eightPuzzle.at(0).at(0) = 4;
 		eightPuzzle.at(0).at(1) = 2;
-		eightPuzzle.at(0).at(2) = 3;
+		eightPuzzle.at(0).at(2) = 8;
 
-		eightPuzzle.at(1).at(0) = 4;
+		eightPuzzle.at(1).at(0) = 6;
 		eightPuzzle.at(1).at(1) = 0;
-		eightPuzzle.at(1).at(2) = 6;
+		eightPuzzle.at(1).at(2) = 3;
 
 		eightPuzzle.at(2).at(0) = 7;
 		eightPuzzle.at(2).at(1) = 5;
-		eightPuzzle.at(2).at(2) = 8;
+		eightPuzzle.at(2).at(2) = 1;
 		n->puzzle = eightPuzzle;
 	}
 

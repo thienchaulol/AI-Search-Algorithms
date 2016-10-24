@@ -75,5 +75,39 @@ void displayPath(node* x){
 	}
 }
 
+//check if puzzle is solvable
+bool solvable(node* x){
+	vector<double> testMatrix;
+	
+	for(int i = 0; i < numRow; i++){
+		for(int j = 0; j < numCol; j++){
+			if(x->puzzle.at(i).at(j) != 0){
+				testMatrix.push_back(x->puzzle.at(i).at(j));
+			}
+		}
+	}
+	
+	int inversions = 0;
+	for(int i = 0; i < testMatrix.size(); i++){
+		for(int j = i + 1; j < testMatrix.size(); j++){
+			if(testMatrix.at(j) > testMatrix.at(i)){
+				inversions++;
+			}
+		}
+	}
+	
+	if(inversions % 2 == 1){
+		return false; //unsolvable
+	} else if(inversions % 2 == 0) {
+		return true; //solvable
+	} //need to deal with case:
+		//1 2 3
+		//4 5 6
+		//7 0 8
+		//before actually using solvable()
+		//in UCS.h/any algorithm, set the above puzzle to a 2d vector
+		//if the node you're looking at is 
+}
+
 #endif
 
