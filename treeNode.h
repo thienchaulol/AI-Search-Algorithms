@@ -27,6 +27,8 @@ struct node{
 	//when you swap left, set swapMove = left
 	//in the next iteration, when creating children, if swapMove == "left", do not create a swapRight child node
 	string swapMove = "";
+	//int to check for diameter of 8 puzzle
+	int totalMoves = 0;
 };
 
 
@@ -58,10 +60,11 @@ void displayPath(node* x){
 	displayVector.push_back(x);
 	while(true){
 		if(x->parent != NULL){
+		//	cout << "Storing node puzzle in vector" << endl;
 			displayVector.push_back(x->parent);	//x->parent is NULL
 			x = x->parent;
 		} else {
-			cout << "finish while loop " << endl;
+			cout << "Finished storing path into display vector" << endl;
 			break;
 		}
 		
@@ -73,6 +76,7 @@ void displayPath(node* x){
 		cout << endl;
 		j++;
 	}
+	//cout << "Finishes for loop?" << endl;
 }
 
 //check if puzzle is solvable
@@ -100,14 +104,15 @@ bool solvable(node* x){
 		return false; //unsolvable
 	} else if(inversions % 2 == 0) {
 		return true; //solvable
-	} //need to deal with case:
-		//1 2 3
-		//4 5 6
-		//7 0 8
-		//before actually using solvable()
-		//in UCS.h/any algorithm, set the above puzzle to a 2d vector
-		//if the node you're looking at is 
+	}
 }
+
+// void deleteBranch(node* x){
+// 	node* temp = x->parent;
+// 	if(x->parent != NULL){
+// 		delete x;
+// 	}
+// }
 
 #endif
 
