@@ -29,10 +29,10 @@ void uniformCostSearch(node* &x, node* goal){
 	
 	//check if user puzzle is equal to goal puzzle
 	if(x->puzzle == goal->puzzle){
-		cout << "puzzles are equal; return\n";
+		cout << "Puzzles are equal; return\n";
 		return;
 	} else {
-		cout << "puzzles are not equal; search \n";
+		cout << "Puzzles are not equal; search \n";
 	}
 
 	//create empty queue of node pointers
@@ -53,35 +53,11 @@ void uniformCostSearch(node* &x, node* goal){
 	bool checkpoint = false;
 	bool checkpoint2 = false;
 	bool checkpoint3 = false;
-	while(!Q.empty() /*&& x->puzzle != goal->puzzle*/){
-		//cout << "total moves: " << Q.front()->totalMoves << endl;
+	while(!Q.empty()){
 		//check if puzzle is solvable
 		if(solvable(Q.front()) == false){
 			cout << "Error: Puzzle is not solvable" << endl;
 			return;
-		}
-
-		//check if totalmoves exceed 8 puzzle diameter
-		if(Q.front()->totalMoves > 32){
-			int numChildren = 0;
-			if(Q.front()->swapBot != NULL){
-				numChildren++;
-			}
-			if(Q.front()->swapLeft != NULL){
-				numChildren++;
-			}
-			if(Q.front()->swapRight != NULL){
-				numChildren++;
-			}
-			if(Q.front()->swapTop != NULL){
-				numChildren++;
-			}
-			numChildren++; //pop one more time for parent
-			while(numChildren > 0){
-				Q.pop();
-			}
-			continue;
-			//pop Q.front() after popping all of Q.front()'s children
 		}
 
 		//find front node's empty tile, store row/column value
@@ -130,6 +106,12 @@ void uniformCostSearch(node* &x, node* goal){
 		else{
 			popLater = true;
 		}
+		
+		// //check if totalmoves exceed 8 puzzle diameter
+		// if(Q.front()->totalMoves >= 31){	//if the Q.front()->totalMoves is equal to 32 or greater, pop Q.front
+		// 	Q.pop();
+		// 	popLater = false; //skip rest of while loop
+		// }
 
 		//do not create duplicate puzzles and avoid back and forth moves
 		if(emptyTileRow == 0 && emptyTileCol == 0 && checkpoint == false){
@@ -141,7 +123,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp1;
 				temp1->parent = Q.front();
 				temp1->swapMove = "swapRight";
-				temp1->totalMoves = temp1->parent->totalMoves + 1;
+				temp1->totalMoves = (temp1->parent->totalMoves) + 1;
 				Q.push(temp1);
 			}
 			//swapBot node and push on to queue
@@ -152,7 +134,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp2;
 				temp2->parent = Q.front();
 				temp2->swapMove = "swapBot";
-				temp2->totalMoves = temp2->parent->totalMoves + 1;
+				temp2->totalMoves = (temp2->parent->totalMoves) + 1;
 				Q.push(temp2);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -166,7 +148,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapLeft = temp3;
 				temp3->parent = Q.front();
 				temp3->swapMove = "swapLeft";
-				temp3->totalMoves = temp3->parent->totalMoves + 1;
+				temp3->totalMoves = (temp3->parent->totalMoves) + 1;
 				Q.push(temp3);
 			}
 			//swapRight node and push onto queue
@@ -177,7 +159,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp4;
 				temp4->parent = Q.front();
 				temp4->swapMove = "swapRight";
-				temp4->totalMoves = temp4->parent->totalMoves + 1;
+				temp4->totalMoves = (temp4->parent->totalMoves) + 1;
 				Q.push(temp4);
 			}
 			//swapBot node and push on to queue
@@ -188,7 +170,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp5;
 				temp5->parent = Q.front();
 				temp5->swapMove = "swapBot";
-				temp5->totalMoves = temp5->parent->totalMoves + 1;
+				temp5->totalMoves = (temp5->parent->totalMoves) + 1;
 				Q.push(temp5);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -202,7 +184,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapLeft = temp6;
 				temp6->parent = Q.front();
 				temp6->swapMove = "swapLeft";
-				temp6->totalMoves = temp6->parent->totalMoves + 1;
+				temp6->totalMoves = (temp6->parent->totalMoves) + 1;
 				Q.push(temp6);
 			}
 			//swapBot node and push on to queue
@@ -213,7 +195,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp7;
 				temp7->parent = Q.front();
 				temp7->swapMove = "swapBot";
-				temp7->totalMoves = temp7->parent->totalMoves + 1;
+				temp7->totalMoves = (temp7->parent->totalMoves) + 1;
 				Q.push(temp7);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -228,7 +210,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapTop = temp8;
 					temp8->parent = Q.front();
 					temp8->swapMove = "swapTop";
-					temp8->totalMoves = temp8->parent->totalMoves + 1;
+					temp8->totalMoves = (temp8->parent->totalMoves) + 1;
 					Q.push(temp8);
 				}
 			}
@@ -240,7 +222,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp9;
 				temp9->parent = Q.front();
 				temp9->swapMove = "swapBot";
-				temp9->totalMoves = temp9->parent->totalMoves + 1;
+				temp9->totalMoves = (temp9->parent->totalMoves) + 1;
 				Q.push(temp9);
 			}
 			//swapRight node and push onto queue
@@ -251,7 +233,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp10;
 				temp10->parent = Q.front();
 				temp10->swapMove = "swapRight";
-				temp10->totalMoves = temp10->parent->totalMoves + 1;
+				temp10->totalMoves = (temp10->parent->totalMoves) + 1;
 				Q.push(temp10);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -266,7 +248,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapTop = temp11;
 					temp11->parent = Q.front();
 					temp11->swapMove = "swapTop";
-					temp11->totalMoves = temp11->parent->totalMoves + 1;
+					temp11->totalMoves = (temp11->parent->totalMoves) + 1;
 					Q.push(temp11);
 				}
 			}
@@ -278,7 +260,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp12;
 				temp12->parent = Q.front();
 				temp12->swapMove = "swapBot";
-				temp12->totalMoves = temp12->parent->totalMoves + 1;
+				temp12->totalMoves = (temp12->parent->totalMoves) + 1;
 				Q.push(temp12);
 			}
 			//swapRight node and push onto queue
@@ -289,7 +271,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp13;
 				temp13->parent = Q.front();
 				temp13->swapMove = "swapRight";
-				temp13->totalMoves = temp13->parent->totalMoves + 1;
+				temp13->totalMoves = (temp13->parent->totalMoves) + 1;
 				Q.push(temp13);
 			}
 			//swapLeft node and push onto queue
@@ -301,7 +283,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapLeft = temp14;
 					temp14->parent = Q.front();
 					temp14->swapMove = "swapLeft";
-					temp14->totalMoves = temp14->parent->totalMoves + 1;
+					temp14->totalMoves = (temp14->parent->totalMoves) + 1;
 					Q.push(temp14);
 				}
 			}
@@ -317,7 +299,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapTop = temp15;
 					temp15->parent = Q.front();
 					temp15->swapMove = "swapTop";
-					temp15->totalMoves = temp15->parent->totalMoves + 1;
+					temp15->totalMoves = (temp15->parent->totalMoves) + 1;
 					Q.push(temp15);
 				}
 			}
@@ -329,7 +311,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapBot = temp16;
 				temp16->parent = Q.front();
 				temp16->swapMove = "swapBot";
-				temp16->totalMoves = temp16->parent->totalMoves + 1;
+				temp16->totalMoves = (temp16->parent->totalMoves) + 1;
 				Q.push(temp16);
 			}
 			//swapLeft node and push onto queue
@@ -340,7 +322,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapLeft = temp17;
 				temp17->parent = Q.front();
 				temp17->swapMove = "swapLeft";
-				temp17->totalMoves = temp17->parent->totalMoves + 1;
+				temp17->totalMoves = (temp17->parent->totalMoves) + 1;
 				Q.push(temp17);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -355,7 +337,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapTop = temp18;
 					temp18->parent = Q.front();
 					temp18->swapMove = "swapTop";
-					temp18->totalMoves = temp18->parent->totalMoves + 1;
+					temp18->totalMoves = (temp18->parent->totalMoves) + 1;
 					Q.push(temp18);
 				}
 			}
@@ -367,7 +349,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp19;
 				temp19->parent = Q.front();
 				temp19->swapMove = "swapRight";
-				temp19->totalMoves = temp19->parent->totalMoves + 1;
+				temp19->totalMoves = (temp19->parent->totalMoves) + 1;
 				Q.push(temp19);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -381,7 +363,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapTop = temp20;
 				temp20->parent = Q.front();
 				temp20->swapMove = "swapTop";
-				temp20->totalMoves = temp20->parent->totalMoves + 1;
+				temp20->totalMoves = (temp20->parent->totalMoves) + 1;
 				Q.push(temp20);
 			}
 			//swapRight node and push onto queue
@@ -392,7 +374,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapRight = temp21;
 				temp21->parent = Q.front();
 				temp21->swapMove = "swapRight";
-				temp21->totalMoves = temp21->parent->totalMoves + 1;
+				temp21->totalMoves = (temp21->parent->totalMoves) + 1;
 				Q.push(temp21);
 			}
 			//swapLeft node and push onto queue
@@ -404,7 +386,7 @@ void uniformCostSearch(node* &x, node* goal){
 					Q.front()->swapLeft = temp22;
 					temp22->parent = Q.front();
 					temp22->swapMove = "swapLeft";
-					temp22->totalMoves = temp22->parent->totalMoves + 1;
+					temp22->totalMoves = (temp22->parent->totalMoves) + 1;
 					Q.push(temp22);
 				}
 			}
@@ -419,7 +401,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapLeft = temp23;
 				temp23->parent = Q.front();
 				temp23->swapMove = "swapLeft";
-				temp23->totalMoves = temp23->parent->totalMoves + 1;
+				temp23->totalMoves = (temp23->parent->totalMoves) + 1;
 				Q.push(temp23);
 			}
 			//swapTop node and push on to queue
@@ -430,7 +412,7 @@ void uniformCostSearch(node* &x, node* goal){
 				Q.front()->swapTop = temp24;
 				temp24->parent = Q.front();
 				temp24->swapMove = "swapTop";
-				temp24->totalMoves = temp24->parent->totalMoves + 1;
+				temp24->totalMoves = (temp24->parent->totalMoves) + 1;
 				Q.push(temp24);
 			}
 			//push node onto end of queue after linking nodes to their parent's
@@ -439,6 +421,7 @@ void uniformCostSearch(node* &x, node* goal){
 			Q.pop();
 		}
 	}
+	cout << "Leaves while" << endl;
 }
 
 #endif

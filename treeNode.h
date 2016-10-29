@@ -57,6 +57,7 @@ void displayPuzzle(node* x){
 //display moves to get to puzzle goal
 void displayPath(node* x){
 	vector< node* > displayVector;
+	//displayPuzzle(x);
 	displayVector.push_back(x);
 	while(true){
 		if(x->parent != NULL){
@@ -76,7 +77,7 @@ void displayPath(node* x){
 		cout << endl;
 		j++;
 	}
-	//cout << "Finishes for loop?" << endl;
+	cout << "Finished displaying path to solution" << endl;
 }
 
 //check if puzzle is solvable
