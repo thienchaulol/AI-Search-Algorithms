@@ -372,7 +372,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp12->parent = Q.front();
 				temp12->swapMove = "swapBot";
 				temp12->totalMoves = (temp12->parent->totalMoves) + 1;
-				cout << "TEMP12 PARENT TMPT: " << temp12->parent->totalMisplacedTiles << endl;
+				//cout << "TEMP12 PARENT TMPT: " << temp12->parent->totalMisplacedTiles << endl;
 				temp12MPT = temp12->parent->totalMisplacedTiles + findMisplacedTiles(temp12, goal);
 			}
 			//swapRight node and push onto queue
@@ -400,9 +400,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			cout << "dog" << endl;
+			//cout << "dog" << endl;
 			int value = findMin(temp11MPT, temp12MPT, temp13MPT, temp14MPT); //segfault
-			cout << "dog" << endl;
+			//cout << "dog" << endl;
 			
 			if(value == temp11MPT){
 				Q.push(temp11);
