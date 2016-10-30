@@ -54,8 +54,8 @@ void aStarMisplacedTile(node* &x, node* goal){
 
 	while(!Q.empty()){
 		//10.29.16 6:01 PM
-		//	have a queue. push the lowest misplaced tiles child onto queue, pop parent
-		//	loop again. push lowest misplaced tiles.
+		//	have a queue. push the child with the lowest misplaced tiles onto queue, pop parent
+		//	loop until find solution
 		//	if the lowest misplaced tiles are the same, choose one at random or leftmost(doesn't matter)
 		//	if you get stuck, get it to function first before perfecting it(professor's words)
 		//
