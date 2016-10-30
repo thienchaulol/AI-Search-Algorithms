@@ -5,6 +5,7 @@
 #include <queue>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "treeNode.h"
 
 using namespace std;
@@ -51,6 +52,8 @@ void aStarMisplacedTile(node* &x, node* goal){
 	
 	queue< node* > Q;
 	Q.push_back(x);
+	
+	vector<int> totalMisplacedTilesVector;
 
 	while(!Q.empty()){
 		//10.29.16 6:01 PM
@@ -130,7 +133,6 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp1->parent = Q.front();
 				temp1->swapMove = "swapRight";
 				temp1->totalMoves = (temp1->parent->totalMoves) + 1;
-				Q.push(temp1);
 			}
 			//swapBot node and push on to queue
 			if(Q.front()->swapMove != "swapTop"){
@@ -141,9 +143,22 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp2->parent = Q.front();
 				temp2->swapMove = "swapBot";
 				temp2->totalMoves = (temp2->parent->totalMoves) + 1;
-				Q.push(temp2);
 			}
-			//push node onto end of queue after linking nodes to their parent's
+			//calculate and push child with least misplaced tiles
+			int temp1MPT = findMisplacedTiles(temp1, goal);
+			int temp2MPT = findMisplacedTiles(temp2, goal);
+			
+			if(temp1MPT == temp2MPT){
+				Q.push(temp1);
+			} else {
+				int minMPT = min(temp1MPT, temp2MPT);
+				if(minMPT == temp1MPT){
+					Q.push(temp1);
+				}
+				if(minMPT == temp2MPT){
+					Q.push(temp2);
+				}
+			}
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 1 && checkpoint == false){
 			//swapLeft node and push onto queue
@@ -155,7 +170,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp3->parent = Q.front();
 				temp3->swapMove = "swapLeft";
 				temp3->totalMoves = (temp3->parent->totalMoves) + 1;
-				Q.push(temp3);
+				//Q.push(temp3);
 			}
 			//swapRight node and push onto queue
 			if(Q.front()->swapMove != "swapLeft"){
@@ -166,7 +181,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp4->parent = Q.front();
 				temp4->swapMove = "swapRight";
 				temp4->totalMoves = (temp4->parent->totalMoves) + 1;
-				Q.push(temp4);
+				//Q.push(temp4);
 			}
 			//swapBot node and push on to queue
 			if(Q.front()->swapMove != "swapTop"){
@@ -177,9 +192,30 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp5->parent = Q.front();
 				temp5->swapMove = "swapBot";
 				temp5->totalMoves = (temp5->parent->totalMoves) + 1;
-				Q.push(temp5);
+				//Q.push(temp5);
 			}
-			//push node onto end of queue after linking nodes to their parent's
+			//calculate and push child with least misplaced tiles
+			int temp3MPT = findMisplacedTiles(temp3, goal);
+			int temp4MPT = findMisplacedTiles(temp4, goal);
+			int temp5MPT = findMisplacedTiles(temp5, goal);
+			
+			if(temp3MPT == temp4MPT || temp3MPT == temp5MPT){
+				Q.push(temp3);
+			} else {
+				int minMPT = min(temp3MPT, temp4MPT);
+				int minMPT2 = min(minMPT, temp5MPT);
+				
+				if(minMPT2 == temp3MPT){
+					Q.push(temp3);
+				}
+				if(minMPT2 == temp4MPT){
+					Q.push(temp4);
+				}
+				if(minMPT2 == temp5MPT){
+					
+				}Q.push(temp5);
+			}
+			
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 2 && checkpoint == false){
 			//swapLeft node and push onto queue
