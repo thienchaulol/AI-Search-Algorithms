@@ -175,6 +175,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp1->swapMove = "swapRight";
 				temp1->totalMoves = (temp1->parent->totalMoves) + 1;
 				temp1MPT = temp1->parent->totalMisplacedTiles + findMisplacedTiles(temp1, goal);
+				temp1->totalMisplacedTiles = temp1MPT;
 			}
 			//swapBot node and push on to queue
 			node* temp2;
@@ -187,6 +188,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp2->swapMove = "swapBot";
 				temp2->totalMoves = (temp2->parent->totalMoves) + 1;
 				temp2MPT = temp2->parent->totalMisplacedTiles + findMisplacedTiles(temp2, goal);
+				temp2->totalMisplacedTiles = temp2MPT;
 			}
 			//calculate and push child with least misplaced tiles
 			
@@ -213,6 +215,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp3->swapMove = "swapLeft";
 				temp3->totalMoves = (temp3->parent->totalMoves) + 1;
 				temp3MPT = temp3->parent->totalMisplacedTiles + findMisplacedTiles(temp3, goal);
+				temp3->totalMisplacedTiles = temp3MPT;
 			}
 			//swapRight node and push onto queue
 			node* temp4;
@@ -225,6 +228,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp4->swapMove = "swapRight";
 				temp4->totalMoves = (temp4->parent->totalMoves) + 1;
 				temp4MPT = temp4->parent->totalMisplacedTiles + findMisplacedTiles(temp4, goal);
+				temp4->totalMisplacedTiles = temp4MPT;
 			}
 			//swapBot node and push on to queue
 			node* temp5;
@@ -237,6 +241,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp5->swapMove = "swapBot";
 				temp5->totalMoves = (temp5->parent->totalMoves) + 1;
 				temp5MPT = temp5->parent->totalMisplacedTiles + findMisplacedTiles(temp5, goal);
+				temp5->totalMisplacedTiles = temp5MPT;
 			}
 			
 			int value = findMin(temp3MPT, temp4MPT, temp5MPT, 2480);
@@ -264,6 +269,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp6->swapMove = "swapLeft";
 				temp6->totalMoves = (temp6->parent->totalMoves) + 1;
 				temp6MPT = temp6->parent->totalMisplacedTiles + findMisplacedTiles(temp6, goal);
+				temp6->totalMisplacedTiles = temp6MPT;
 			}
 			//swapBot node and push on to queue
 			node* temp7;
@@ -276,6 +282,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp7->swapMove = "swapBot";
 				temp7->totalMoves = (temp7->parent->totalMoves) + 1;
 				temp7MPT = temp7->parent->totalMisplacedTiles + findMisplacedTiles(temp7, goal);
+				temp7->totalMisplacedTiles = temp7MPT;
 			}
 			
 			int value = findMin(temp6MPT, temp7MPT, 2480, 2480);
@@ -303,6 +310,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp8->swapMove = "swapTop";
 					temp8->totalMoves = (temp8->parent->totalMoves) + 1;
 					temp8MPT = temp8->parent->totalMisplacedTiles + findMisplacedTiles(temp8, goal);
+					temp8->totalMisplacedTiles = temp8MPT;
 				}
 			}
 			//swapBot node and push on to queue
@@ -316,6 +324,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp9->swapMove = "swapBot";
 				temp9->totalMoves = (temp9->parent->totalMoves) + 1;
 				temp9MPT = temp9->parent->totalMisplacedTiles + findMisplacedTiles(temp9, goal);
+				temp9->totalMisplacedTiles = temp9MPT;
 			}
 			//swapRight node and push onto queue
 			node* temp10;
@@ -328,6 +337,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp10->swapMove = "swapRight";
 				temp10->totalMoves = (temp10->parent->totalMoves) + 1;
 				temp10MPT = temp10->parent->totalMisplacedTiles + findMisplacedTiles(temp10, goal);
+				temp10->totalMisplacedTiles = temp10MPT;
 			}
 			
 			int value = findMin(temp8MPT, temp9MPT, temp10MPT, 2480);
@@ -361,6 +371,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp11->swapMove = "swapTop";
 					temp11->totalMoves = (temp11->parent->totalMoves) + 1;
 					temp11MPT = temp11->parent->totalMisplacedTiles + findMisplacedTiles(temp11, goal);
+					temp11->totalMisplacedTiles = temp11MPT;
 				}
 			}
 			//swapBot node and push on to queue
@@ -374,6 +385,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp12->totalMoves = (temp12->parent->totalMoves) + 1;
 				//cout << "TEMP12 PARENT TMPT: " << temp12->parent->totalMisplacedTiles << endl;
 				temp12MPT = temp12->parent->totalMisplacedTiles + findMisplacedTiles(temp12, goal);
+				temp12->totalMisplacedTiles = temp12MPT;
 			}
 			//swapRight node and push onto queue
 			if(Q.front()->swapMove != "swapLeft"){
@@ -385,6 +397,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp13->swapMove = "swapRight";
 				temp13->totalMoves = (temp13->parent->totalMoves) + 1;
 				temp13MPT = temp13->parent->totalMisplacedTiles + findMisplacedTiles(temp13, goal);
+				temp13->totalMisplacedTiles = temp13MPT;
 			}
 			//swapLeft node and push onto queue
 			if(checkpoint2 == false){
@@ -397,6 +410,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp14->swapMove = "swapLeft";
 					temp14->totalMoves = (temp14->parent->totalMoves) + 1;
 					temp14MPT = temp14->parent->totalMisplacedTiles + findMisplacedTiles(temp14, goal);
+					temp14->totalMisplacedTiles = temp14MPT;
 				}
 			}
 			
@@ -433,6 +447,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp15->swapMove = "swapTop";
 					temp15->totalMoves = (temp15->parent->totalMoves) + 1;
 					temp15MPT = temp15->parent->totalMisplacedTiles + findMisplacedTiles(temp15, goal);
+					temp15->totalMisplacedTiles = temp15MPT;
 				}
 			}
 			//swapBot node and push on to queue
@@ -446,6 +461,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp16->swapMove = "swapBot";
 				temp16->totalMoves = (temp16->parent->totalMoves) + 1;
 				temp16MPT = temp16->parent->totalMisplacedTiles + findMisplacedTiles(temp16, goal);
+				temp16->totalMisplacedTiles = temp16MPT;
 			}
 			//swapLeft node and push onto queue
 			node* temp17;
@@ -458,6 +474,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp17->swapMove = "swapLeft";
 				temp17->totalMoves = (temp17->parent->totalMoves) + 1;
 				temp17MPT = temp17->parent->totalMisplacedTiles + findMisplacedTiles(temp17, goal);
+				temp17->totalMisplacedTiles = temp17MPT;
 			}
 			
 			int value = findMin(temp15MPT, temp16MPT, temp17MPT, 2480);
@@ -487,6 +504,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp18->swapMove = "swapTop";
 					temp18->totalMoves = (temp18->parent->totalMoves) + 1;
 					temp18MPT = temp18->parent->totalMisplacedTiles + findMisplacedTiles(temp18, goal);
+					temp18->totalMisplacedTiles = temp18MPT;
 				}
 			}
 			//swapRight node and push onto queue
@@ -500,6 +518,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp19->swapMove = "swapRight";
 				temp19->totalMoves = (temp19->parent->totalMoves) + 1;
 				temp19MPT = temp19->parent->totalMisplacedTiles + findMisplacedTiles(temp19, goal);
+				temp19->totalMisplacedTiles = temp19MPT;
 			}
 			
 			int value = findMin(temp18MPT, temp19MPT, 2480, 2480);
@@ -525,6 +544,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp20->swapMove = "swapTop";
 				temp20->totalMoves = (temp20->parent->totalMoves) + 1;
 				temp20MPT = temp20->parent->totalMisplacedTiles + findMisplacedTiles(temp20, goal);
+				temp20->totalMisplacedTiles = temp20MPT;
 			}
 			//swapRight node and push onto queue
 			node* temp21;
@@ -537,6 +557,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp21->swapMove = "swapRight";
 				temp21->totalMoves = (temp21->parent->totalMoves) + 1;
 				temp21MPT = temp21->parent->totalMisplacedTiles + findMisplacedTiles(temp21, goal);
+				temp21->totalMisplacedTiles = temp21MPT;
 			}
 			//swapLeft node and push onto queue
 			node* temp22;
@@ -550,6 +571,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					temp22->swapMove = "swapLeft";
 					temp22->totalMoves = (temp22->parent->totalMoves) + 1;
 					temp22MPT = temp22->parent->totalMisplacedTiles + findMisplacedTiles(temp22, goal);
+					temp22->totalMisplacedTiles = temp22MPT;
 				}
 			}
 			
@@ -579,6 +601,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp23->swapMove = "swapLeft";
 				temp23->totalMoves = (temp23->parent->totalMoves) + 1;
 				temp23MPT = temp23->parent->totalMisplacedTiles + findMisplacedTiles(temp23, goal);
+				temp23->totalMisplacedTiles = temp23MPT;
 			}
 			//swapTop node and push on to queue
 			node* temp24;
@@ -591,6 +614,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 				temp24->swapMove = "swapTop";
 				temp24->totalMoves = (temp24->parent->totalMoves) + 1;
 				temp24MPT = temp24->parent->totalMisplacedTiles + findMisplacedTiles(temp24, goal);
+				temp24->totalMisplacedTiles = temp24MPT;
 			}
 			
 			int value = findMin(temp23MPT, temp24MPT, 2480 , 2480);
