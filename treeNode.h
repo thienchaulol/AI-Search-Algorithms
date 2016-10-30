@@ -29,6 +29,8 @@ struct node{
 	string swapMove = "";
 	//int to check for diameter of 8 puzzle
 	int totalMoves = 0;
+	//int to check shortest path
+	int totalMisplacedTiles = 0;
 };
 
 
