@@ -25,11 +25,15 @@ int calcManhattanDistance(node* x, node* goal){
 	for(int i = 0; i < numRow; i++){
 		for(int j = 0; j < numCol; j++){
 			if(x->puzzle.at(i).at(j) != goal->puzzle.at(i).at(j) && x->puzzle.at(i).at(j) != 0){
+				// cout << "I: " << i << endl;
+				// cout << "J: " << j << endl;
 				//have position of misplaced tile, now calc MD for this tile
-				//find i and j of where the tile is in goal node puzzle
+				//find k and l of where the tile is in goal node puzzle
+				leaveEarly = false;
 				for(int k = 0; k < numRow; k++){
 					for(int l = 0; l < numCol; l++){
-						if(goal->puzzle.at(k).at(l) == x->puzzle.at(i).at(j)){
+						if(x->puzzle.at(i).at(j) == goal->puzzle.at(k).at(l)){
+							// cout << "Set GoalRow and GoalCol" << endl;
 							goalRow = k;
 							goalCol = l;
 							leaveEarly = true;
@@ -45,20 +49,20 @@ int calcManhattanDistance(node* x, node* goal){
 				tempI = i;
 				tempJ = j;
 				//add manhattan distance of specific tile found
-				while(goalRow != tempI && goalCol != tempJ){
-					if(goalRow < tempI){
+				while(goalRow != tempI || goalCol != tempJ){
+					if(tempI > goalRow){
 						tempI--;
 						MD++;
 					}
-					if(goalRow > tempI){
+					if(tempI < goalRow){
 						tempI++;
 						MD++;
 					}
-					if(goalCol < tempJ){
+					if(tempJ > goalCol){
 						tempJ--;
 						MD++;
 					}
-					if(goalCol > tempJ){
+					if(tempJ < goalCol){
 						tempJ++;
 						MD++;
 					}
