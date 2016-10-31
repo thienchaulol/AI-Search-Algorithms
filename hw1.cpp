@@ -7,7 +7,7 @@
 
 #include "UCS.h"
 #include "aStarMisplacedTile.h"
-//#include "aStarManhattan.h"
+#include "aStarManhattan.h"
 #include "treeNode.h"
 	
 using namespace std;;
@@ -101,7 +101,11 @@ int main(){
 
 	if(userChoice == 1) uniformCostSearch(n, goalNode); //perform Uniform Cost Search on root node n
 	if(userChoice == 2) aStarMisplacedTile(n, goalNode); //perform A* with the Misplaced Tile Heuristic on root node n
-//	if(userChoice == 3); //perform A* with the Manhattan distance heuristic on root node n
+//	if(userChoice == 3) aStarManhattan(n, goalNode); //perform A* with the Manhattan distance heuristic on root node n
+	if(userChoice == 3) {
+		int x = calcManhattanDistance(n, goalNode);
+		cout << "Manhattan Distance: " << x << endl;
+	}
 
 	//display solution
 	displayPath(n);
