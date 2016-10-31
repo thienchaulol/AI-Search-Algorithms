@@ -38,7 +38,7 @@ struct node{
 	//int to check for diameter of 8 puzzle
 	int totalMoves = 0;
 	//int to check totalMisplacedTiles of node
-	int totalMisplacedTiles = 0;
+	int totalMisplacedTiles = 2480;
 };
 
 

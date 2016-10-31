@@ -29,6 +29,7 @@ int findMisplacedTiles(node* x, node* goal){
 
 int findMin(int w, int x, int y, int z){
 	vector<int> temp;
+	cout << "5" << endl;
 	if(w != 2480){
 		temp.push_back(w);
 	}
@@ -41,12 +42,14 @@ int findMin(int w, int x, int y, int z){
 	if(z != 2480){
 		temp.push_back(z);
 	}
+	cout << "4" << endl;
 	int lowest = temp.front();
 	for(int i = 0; i < temp.size(); i++){
 		if(temp.at(i) < lowest){
 			lowest = temp.at(i);
 		}
 	}
+	cout << "Lowest: " << lowest << endl;
 	return lowest;
 }
 
@@ -111,8 +114,8 @@ void aStarMisplacedTile(node* &x, node* goal){
 			isRoot = false;
 		}
 
-	//	displayPuzzle(Q.front());
-	//	cout << endl;
+		displayPuzzle(Q.front());
+		cout << "Q.front()->totalMisplacedTiles: " << Q.front()->totalMisplacedTiles << endl;
 
 		//check if puzzle is solvable
 		if(solvable(Q.front()) == false){
@@ -166,10 +169,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		
 		//do not create duplicate puzzles and avoid back and forth moves
+		//add statement from first if statement that checks if heuristic is equal, to all statements
 		if(emptyTileRow == 0 && emptyTileCol == 0 && checkpoint == false){
 			//swapRight node and push onto queue
-			int temp1MPT = 2480;
-			int temp2MPT = 2480;
 			node* temp1;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
@@ -200,26 +202,22 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			if(temp1MPT == temp2MPT && (temp1MPT > 1)){
+			if(temp1->totalMisplacedTiles == temp2->totalMisplacedTiles && (temp1->totalMisplacedTiles > 1)){
 				Q.front() = chooseDifferentDirection(Q.front());
 				continue;
 			}
 			
 			//calculate and push child with least misplaced tiles
-			int value = findMin(temp1MPT, temp2MPT, 2480, 2480);
-			if(value == temp1MPT && Q.front()->swapMove != "swapLeft"){
+			int value = findMin(temp1->totalMisplacedTiles, temp2->totalMisplacedTiles, 2480, 2480);
+			if(value == temp1->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp1);
 			}
-			else if(value == temp2MPT && Q.front()->swapMove != "swapTop"){
+			else if(value == temp2->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp2);
 			}
 		}
-		//add check to see if MPT values are same
 		if(emptyTileRow == 0 && emptyTileCol == 1 && checkpoint == false){
 			//swapLeft node and push onto queue
-			int temp3MPT = 2480;
-			int temp4MPT = 2480;
-			int temp5MPT = 2480;
 			node* temp3;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
@@ -265,21 +263,19 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			int value = findMin(temp3MPT, temp4MPT, temp5MPT, 2480);
-			if(value == temp3MPT && Q.front()->swapMove != "swapRight"){
+			int value = findMin(temp3->totalMisplacedTiles, temp4->totalMisplacedTiles, temp5->totalMisplacedTiles, 2480);
+			if(value == temp3->totalMisplacedTiles && Q.front()->swapMove != "swapRight"){
 				Q.push(temp3);
 			}
-			else if(value == temp4MPT && Q.front()->swapMove != "swapLeft"){
+			else if(value == temp4->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp4);
 			}
-			else if(value == temp5MPT && Q.front()->swapMove != "swapTop"){
+			else if(value == temp5->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp5);
 			}
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 2 && checkpoint == false){
 			//swapLeft node and push onto queue
-			int temp6MPT = 2480;
-			int temp7MPT = 2480;
 			node* temp6;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
@@ -309,21 +305,16 @@ void aStarMisplacedTile(node* &x, node* goal){
 					recordParentDirection(temp7, temp7->swapMove);
 				}
 			}
-			cout << " ?? " << endl;
-			int value = findMin(temp6MPT, temp7MPT, 2480, 2480); //seg fault in findmin. change all tempXMPT to tempX->totalMisplacedTiles
-			cout << "SH" << endl;
-			if(value == temp6MPT && Q.front()->swapMove != "swapRight"){
+			int value = findMin(temp6->totalMisplacedTiles, temp7->totalMisplacedTiles, 2480, 2480);
+			if(value == temp6->totalMisplacedTiles && Q.front()->swapMove != "swapRight"){
 				Q.push(temp6);
 			}
-			else if(value == temp7MPT && Q.front()->swapMove != "swapTop"){
+			if(value == temp7->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp7);
 			}
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 0){
 			//swapTop node and push on to queue
-			int temp8MPT = 2480;
-			int temp9MPT = 2480;
-			int temp10MPT = 2480;
 			node* temp8;
 			if(checkpoint == false){
 				if(Q.front()->swapMove != "swapBot"){
@@ -371,22 +362,18 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			int value = findMin(temp8MPT, temp9MPT, temp10MPT, 2480);
-			if(value == temp8MPT && checkpoint == false && Q.front()->swapMove != "swapBot"){
+			int value = findMin(temp8->totalMisplacedTiles, temp9->totalMisplacedTiles, temp10->totalMisplacedTiles, 2480);
+			if(value == temp8->totalMisplacedTiles && checkpoint == false && Q.front()->swapMove != "swapBot"){
 				Q.push(temp8);
 			}
-			else if(value == temp9MPT && Q.front()->swapMove != "swapTop"){
+			else if(value == temp9->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp9);
 			}
-			else if(value == temp10MPT && Q.front()->swapMove != "swapLeft"){
+			else if(value == temp10->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp10);
 			}
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 1){
-			int temp11MPT = 2480;
-			int temp12MPT = 2480;
-			int temp13MPT = 2480;
-			int temp14MPT = 2480;
 			node* temp11;
 			node* temp12;
 			node* temp13;
@@ -452,33 +439,29 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			//cout << "dog" << endl;
-			int value = findMin(temp11MPT, temp12MPT, temp13MPT, temp14MPT); //segfault
-			//cout << "dog" << endl;
+			int value = findMin(temp11->totalMisplacedTiles, temp12->totalMisplacedTiles, temp13->totalMisplacedTiles, temp14->totalMisplacedTiles); //segfault
 			
-			if(value == temp11MPT && checkpoint == false && Q.front()->swapMove != "swapBot"){
+			if(value == temp11->totalMisplacedTiles && checkpoint == false && Q.front()->swapMove != "swapBot"){
 				Q.push(temp11);
 			}
-			else if(value == temp12MPT && Q.front()->swapMove != "swapTop"){
+			else if(value == temp12->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp12);
 			}
-			else if(value == temp13MPT && Q.front()->swapMove != "swapLeft"){
+			else if(value == temp13->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp13);
 			}
-			else if(value == temp14MPT && checkpoint2 == false && Q.front()->swapMove != "swapRight"){
+			else if(value == temp14->totalMisplacedTiles && checkpoint2 == false && Q.front()->swapMove != "swapRight"){
 				Q.push(temp14);
 			}
 		}
+		//initiate all nodes before if statements. memory should be OK
 		if(emptyTileRow == 1 && emptyTileCol == 2){
 			//swapTop node and push on to queue
-			int temp15MPT = 2480;
-			int temp16MPT = 2480;
-			int temp17MPT = 2480;
-			node* temp15;
+			node* temp15 = new node;
+			cout << "0" << endl;
 			if(checkpoint == false){
 				if(Q.front()->swapMove != "swapBot"){
 					if(!(isRoot && Q.front()->tookTop == true)){
-						temp15 = new node;
 						temp15->puzzle = Q.front()->puzzle;
 						swap(temp15->puzzle.at(emptyTileRow).at(emptyTileCol), temp15->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 						Q.front()->swapTop = temp15;
@@ -491,10 +474,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapBot node and push on to queue
-			node* temp16;
+			node* temp16 = new node;
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp16 = new node;
 					temp16->puzzle = Q.front()->puzzle;
 					swap(temp16->puzzle.at(emptyTileRow).at(emptyTileCol), temp16->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp16;
@@ -506,10 +488,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapLeft node and push onto queue
-			node* temp17;
+			node* temp17 = new node;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
-					temp17 = new node;
 					temp17->puzzle = Q.front()->puzzle;
 					swap(temp17->puzzle.at(emptyTileRow).at(emptyTileCol), temp17->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 					Q.front()->swapLeft = temp17;
@@ -520,23 +501,21 @@ void aStarMisplacedTile(node* &x, node* goal){
 					recordParentDirection(temp17, temp17->swapMove);
 				}
 			}
-			
-			int value = findMin(temp15MPT, temp16MPT, temp17MPT, 2480);
-			
-			if(value == temp15MPT && checkpoint == false && Q.front()->swapMove != "swapBot"){
+			cout << "1" << endl;
+			int value = findMin(temp15->totalMisplacedTiles, temp16->totalMisplacedTiles, temp17->totalMisplacedTiles, 2480);
+			cout << "2" << endl;
+			if(value == temp15->totalMisplacedTiles && checkpoint == false && Q.front()->swapMove != "swapBot"){
 				Q.push(temp15);
 			}			
-			else if(value == temp16MPT && Q.front()->swapMove != "swapTop"){
+			else if(value == temp16->totalMisplacedTiles && Q.front()->swapMove != "swapTop"){
 				Q.push(temp16);				
 			}			
-			else if(value == temp17MPT && Q.front()->swapMove != "swapRight"){
+			else if(value == temp17->totalMisplacedTiles && Q.front()->swapMove != "swapRight"){
 				Q.push(temp17);				
 			}
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 0){
 			//swapTop node and push on to queue
-			int temp18MPT = 2480;
-			int temp19MPT = 2480;
 			node* temp18;
 			if(checkpoint2 == false){
 				if(Q.front()->swapMove != "swapBot"){
@@ -569,19 +548,16 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			int value = findMin(temp18MPT, temp19MPT, 2480, 2480);
-			if(value == temp18MPT && checkpoint2 == false && Q.front()->swapMove != "swapBot"){
+			int value = findMin(temp18->totalMisplacedTiles, temp19->totalMisplacedTiles, 2480, 2480);
+			if(value == temp18->totalMisplacedTiles && checkpoint2 == false && Q.front()->swapMove != "swapBot"){
 				Q.push(temp18);
 			}
-			else if(value == temp19MPT && Q.front()->swapMove != "swapLeft"){
+			else if(value == temp19->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp19);				
 			}
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 1){
 			//swapTop node and push on to queue
-			int temp20MPT = 2480;
-			int temp21MPT = 2480;
-			int temp22MPT = 2480;
 			node* temp20;
 			if(Q.front()->swapMove != "swapBot"){
 				if(!(isRoot && Q.front()->tookTop == true)){
@@ -629,22 +605,20 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			int value = findMin(temp20MPT, temp21MPT, temp22MPT, 2480);
+			int value = findMin(temp20->totalMisplacedTiles, temp21->totalMisplacedTiles, temp22->totalMisplacedTiles, 2480);
 			
-			if(value == temp20MPT && Q.front()->swapMove != "swapBot"){
+			if(value == temp20->totalMisplacedTiles && Q.front()->swapMove != "swapBot"){
 				Q.push(temp20);
 			}			
-			else if(value == temp21MPT && Q.front()->swapMove != "swapLeft"){
+			else if(value == temp21->totalMisplacedTiles && Q.front()->swapMove != "swapLeft"){
 				Q.push(temp21);
 			}			
-			else if(value == temp22MPT && Q.front()->swapMove != "swapRight"){
+			else if(value == temp22->totalMisplacedTiles && Q.front()->swapMove != "swapRight"){
 				Q.push(temp22);
 			}
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 2){
 			//swapLeft node and push onto queue
-			int temp23MPT = 2480;
-			int temp24MPT = 2480;
 			node* temp23;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
@@ -675,12 +649,12 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			
-			int value = findMin(temp23MPT, temp24MPT, 2480 , 2480);
+			int value = findMin(temp23->totalMisplacedTiles, temp24->totalMisplacedTiles, 2480 , 2480);
 			
-			if(value == temp23MPT && Q.front()->swapMove != "swapRight"){
+			if(value == temp23->totalMisplacedTiles && Q.front()->swapMove != "swapRight"){
 				Q.push(temp23);
 			}			
-			else if(value == temp24MPT && Q.front()->swapMove != "swapBot"){
+			else if(value == temp24->totalMisplacedTiles && Q.front()->swapMove != "swapBot"){
 				Q.push(temp24);
 			}
 		}
