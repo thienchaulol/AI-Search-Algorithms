@@ -59,6 +59,9 @@ void uniformCostSearch(node* &x, node* goal){
 			cout << "Error: Puzzle is not solvable" << endl;
 			return;
 		}
+		
+		displayPuzzle(Q.front());
+		cout << endl;
 
 		//find front node's empty tile, store row/column value
 		//create nodes of swappable states. use swap()
