@@ -19,6 +19,14 @@ struct node{
 	node* swapRight = 0;
 	node* swapTop = 0;
 	node* swapBot = 0;
+	
+	//bool values to check which route parent took
+	//used for heuristics that get stuck
+	bool tookLeft = false;
+	bool tookRight = false;
+	bool tookTop = false;
+	bool tookBot = false;
+	
 	//node pointer to point back to parent
 	node* parent = NULL;
 	//string to know what move parent made
@@ -29,7 +37,7 @@ struct node{
 	string swapMove = "";
 	//int to check for diameter of 8 puzzle
 	int totalMoves = 0;
-	//int to check shortest path
+	//int to check totalMisplacedTiles of node
 	int totalMisplacedTiles = 0;
 };
 
@@ -110,12 +118,33 @@ bool solvable(node* x){
 	}
 }
 
-// void deleteBranch(node* x){
-// 	node* temp = x->parent;
-// 	if(x->parent != NULL){
-// 		delete x;
-// 	}
-// }
+//record parent direction incase heuristic fails(if, at any state, all heuristics are equal)
+void recordParentDirection(node* x, string y){
+	if(x->parent == NULL){
+		if(y == "swapRight"){
+			x->parent->tookRight = true;
+		}
+		if(y == "swapLeft"){
+			x->parent->tookLeft = true;
+		}
+		if(y == "swapTop"){
+			x->parent->tookTop = true;
+		}
+		if(y == "swapBot"){
+			x->parent->tookBot = true;
+		}
+	}
+	return;
+}
+
+//choose different root direction when heuristic fails
+node* chooseDifferentDirection(node* x){
+	cout << "Choosing different direction" << endl;
+	while(x->parent != NULL){
+		x = x->parent;
+	}
+	return x;
+}
 
 #endif
 
