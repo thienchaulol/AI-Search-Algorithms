@@ -13,13 +13,15 @@ using namespace std;
 //  compare all the paths and search the path with the smallest total distance from root to goal
 
 int calcManhattanDistance(node* x, node* goal){
-	int MD;
+	int MD = 0;
 	int goalRow;
 	int goalCol;
 	bool leaveEarly = false;
+	int tempI;
+	int tempJ;
 	
 	//find misplaced tiles and calc MD for each of them
-	cout << "Beginning" << endl;
+	// cout << "Beginning" << endl;
 	for(int i = 0; i < numRow; i++){
 		for(int j = 0; j < numCol; j++){
 			if(x->puzzle.at(i).at(j) != goal->puzzle.at(i).at(j) && x->puzzle.at(i).at(j) != 0){
@@ -38,24 +40,26 @@ int calcManhattanDistance(node* x, node* goal){
 						break;
 					}
 				}
-				cout << "GoalRow: " << goalRow << endl;
-				cout << "GoalCol: " << goalCol << endl;
+				// cout << "GoalRow: " << goalRow << endl;
+				// cout << "GoalCol: " << goalCol << endl;
+				tempI = i;
+				tempJ = j;
 				//add manhattan distance of specific tile found
-				while(goalRow != i && goalCol != j){
-					if(goalRow < i){
-						i--;
+				while(goalRow != tempI && goalCol != tempJ){
+					if(goalRow < tempI){
+						tempI--;
 						MD++;
 					}
-					if(goalRow > i){
-						i++;
+					if(goalRow > tempI){
+						tempI++;
 						MD++;
 					}
-					if(goalCol < j){
-						j--;
+					if(goalCol < tempJ){
+						tempJ--;
 						MD++;
 					}
-					if(goalCol > j){
-						j++;
+					if(goalCol > tempJ){
+						tempJ++;
 						MD++;
 					}
 				}
@@ -63,7 +67,7 @@ int calcManhattanDistance(node* x, node* goal){
 			}
 		}
 	}
-	cout << "End" << endl;
+	// cout << "End" << endl;
 	
 	return MD;
 }
