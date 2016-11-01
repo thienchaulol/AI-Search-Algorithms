@@ -115,6 +115,9 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
     Q.pop();    //pop Q.top() which is x
     x = parent; //set x to parent
     
+    //will expand a node if this function is called
+    totalNodesExpanded++;
+    
     //check number of nodes in queue. store max.
     if(Q.size() > maxNumOfNodesInQueue){
     	maxNumOfNodesInQueue = Q.size();
@@ -146,7 +149,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -158,7 +160,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 0 && emptyTileCol == 1){
@@ -172,7 +173,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapRight node and push onto queue
 		if(x->swapMove != "swapLeft"){
@@ -184,7 +184,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -196,7 +195,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 0 && emptyTileCol == 2){
@@ -210,7 +208,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -222,7 +219,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 1 && emptyTileCol == 0){
@@ -236,7 +232,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -248,7 +243,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapRight node and push onto queue
 		if(x->swapMove != "swapLeft"){
@@ -260,7 +254,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 1 && emptyTileCol == 1){
@@ -274,7 +267,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -286,7 +278,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapRight node and push onto queue
 		if(x->swapMove != "swapLeft"){
@@ -298,7 +289,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapLeft node and push onto queue
 		if(x->swapMove != "swapRight"){
@@ -310,7 +300,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 1 && emptyTileCol == 2){
@@ -324,7 +313,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapBot node and push on to queue
 		if(x->swapMove != "swapTop"){
@@ -336,7 +324,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapBot";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapLeft node and push onto queue
 		if(x->swapMove != "swapRight"){
@@ -348,7 +335,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 2 && emptyTileCol == 0){
@@ -362,7 +348,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapRight node and push onto queue
 		if(x->swapMove != "swapLeft"){
@@ -374,7 +359,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 2 && emptyTileCol == 1){
@@ -388,7 +372,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapRight node and push onto queue
 		if(x->swapMove != "swapLeft"){
@@ -400,7 +383,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapRight";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapLeft node and push onto queue
 		if(x->swapMove != "swapRight"){
@@ -412,7 +394,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 	if(emptyTileRow == 2 && emptyTileCol == 2){
@@ -426,7 +407,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapLeft";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 		//swapTop node and push on to queue
 		if(x->swapMove != "swapBot"){
@@ -438,7 +418,6 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 			temp->swapMove = "swapTop";
 			temp->totalMoves = (temp->parent->totalMoves) + 1;
 			Q.push(temp);
-			totalNodesExpanded++;
 		}
 	}
 }
