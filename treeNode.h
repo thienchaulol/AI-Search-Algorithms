@@ -16,7 +16,7 @@ int numRow = 3;
 int numCol = 3;
 
 //total number of nodes expanded by algorithm
-int totalNodesExpanded = 0;	//everytime you push a node onto any queue, do "totalNodesExpanded++;"
+int totalNodesExpanded = 0;	//everytime you create children, do "totalNodesExpanded++;"
 
 //maximum number of nodes in queue during algorithm
 int maxNumOfNodesInQueue = 0;
