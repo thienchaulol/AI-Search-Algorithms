@@ -90,12 +90,12 @@ int main(){
 			eightPuzzle.at(2).at(1) = 5;
 			eightPuzzle.at(2).at(2) = 1;
 			n->puzzle = eightPuzzle;
-		}
+	}
 		
 		if(solvable(n) == true){
 			break;
 		} else {
-			cout << "Puzzle entered is unsolvable. Please enter another." << endl;
+			cout << "Error: Puzzle entered is unsolvable. Program will restart." << endl << endl;
 		}
 	}	
 
@@ -113,5 +113,6 @@ int main(){
 
 	//display solution
 	displayPath(n);
+	cout << endl << "Total nodes expanded: " << totalNodesExpanded << endl;
 	return 0;
 }

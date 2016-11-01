@@ -16,7 +16,7 @@ int numRow = 3;
 int numCol = 3;
 
 //total number of nodes expanded by algorithm
-int totalNodesExpanded = 0;
+int totalNodesExpanded = 0;	//everytime you push a node onto any queue, do totalNodesExpanded++;
 
 //maximum number of nodes in queue during algorithm
 int maxNumOfNodesInQueue = 0;
@@ -30,6 +30,7 @@ using namespace std;
 
 //nodes of puzzle states
 struct node{
+	
 	vector< vector<double> > puzzle;
 	//node pointers used to create new nodes
 	node* swapLeft = 0;
