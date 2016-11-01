@@ -115,6 +115,11 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
     Q.pop();    //pop Q.top() which is x
     x = parent; //set x to parent
     
+    //check number of nodes in queue. store max.
+    if(Q.size() > maxNumOfNodesInQueue){
+    	maxNumOfNodesInQueue = Q.size();
+    }
+    
     //find where empty tile is
     int emptyTileCol;
     int emptyTileRow;

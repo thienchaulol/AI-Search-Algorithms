@@ -115,5 +115,6 @@ int main(){
 	displayPath(n);
 	cout << endl << "Total nodes expanded: " << totalNodesExpanded << endl;
 	cout << "Depth of solution: " << n->totalMoves << endl;
+	cout << "Max number of nodes in queue:: " << maxNumOfNodesInQueue << endl;
 	return 0;
 }

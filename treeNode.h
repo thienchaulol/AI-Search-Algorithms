@@ -22,7 +22,7 @@ int totalNodesExpanded = 0;	//everytime you push a node onto any queue, do "tota
 int maxNumOfNodesInQueue = 0;
 
 //depth of goal node
-int depthOfGoalNode = 0;	//depth of solution is totalMoves, lucky you
+//int depthOfGoalNode = 0;	//depth of solution is totalMoves, lucky you
 
 //CHANGING GOAL STATE: HARDCODE setGoal() to new goal state. OR make function to input new goal state
 
@@ -53,7 +53,7 @@ struct node{
 	//when you swap left, set swapMove = left
 	//in the next iteration, when creating children, if swapMove == "left", do not create a swapRight child node
 	string swapMove = "";
-	//int to check for diameter of 8 puzzle
+	//int to check for diameter of 8 puzzle. can be used to find solution node depth
 	int totalMoves = 0;
 };
 
