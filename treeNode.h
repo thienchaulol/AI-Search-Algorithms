@@ -16,13 +16,13 @@ int numRow = 3;
 int numCol = 3;
 
 //total number of nodes expanded by algorithm
-int totalNodesExpanded = 0;	//everytime you push a node onto any queue, do totalNodesExpanded++;
+int totalNodesExpanded = 0;	//everytime you push a node onto any queue, do "totalNodesExpanded++;"
 
 //maximum number of nodes in queue during algorithm
 int maxNumOfNodesInQueue = 0;
 
 //depth of goal node
-int depthOfGoalNode = 0;
+int depthOfGoalNode = 0;	//depth of solution is totalMoves, lucky you
 
 //CHANGING GOAL STATE: HARDCODE setGoal() to new goal state. OR make function to input new goal state
 

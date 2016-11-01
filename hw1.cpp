@@ -114,5 +114,6 @@ int main(){
 	//display solution
 	displayPath(n);
 	cout << endl << "Total nodes expanded: " << totalNodesExpanded << endl;
+	cout << "Depth of solution: " << n->totalMoves << endl;
 	return 0;
 }
