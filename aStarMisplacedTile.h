@@ -7,11 +7,27 @@
 
 using namespace std;
 
-int findMisplacedTiles(node* x, node* goal){
+//calculate misplaced tiles
+int findMisplacedTiles(node* x){
+    //goal 2D vector
+	vector< vector<double> > goal;
+	goal.resize(numCol, vector<double> (numRow, 0));
+	goal.at(0).at(0) = 1;
+	goal.at(0).at(1) = 2;
+	goal.at(0).at(2) = 3;
+
+	goal.at(1).at(0) = 4;
+	goal.at(1).at(1) = 5;
+	goal.at(1).at(2) = 6;
+
+	goal.at(2).at(0) = 7;
+	goal.at(2).at(1) = 8;
+	goal.at(2).at(2) = 0;
+	
     int totalMisplacedTiles = 0;
     for(int i = 0; i < numRow; i++){
         for(int j = 0; j < numCol; j++){
-            if(x->puzzle.at(i).at(j) != goal->puzzle.at(i).at(j) && x->puzzle.at(i).at(j) != 0){
+            if(x->puzzle.at(i).at(j) != goal.at(i).at(j) && x->puzzle.at(i).at(j) != 0){
                 totalMisplacedTiles++;
             }
         }
@@ -19,15 +35,17 @@ int findMisplacedTiles(node* x, node* goal){
     return totalMisplacedTiles;
 }
 
-bool checkIfGoal(node* x, node* goal){
-    if(x->puzzle == goal->puzzle){
-        return true;
-    } else {
-        return false;
+//custom priority determiner for priority queue of node*
+struct customPriorityDeterminer{
+    bool operator()(node* &lhs, node* &rhs){    //suppose to be: bool operator()(const node* &lhs, node* &rhs) const{
+        //(findMisplacedTiles(lhs) + lhs->totalMoves) is the f(n) = g(n) + h(n)
+        //sets the value with the lower ( < ) amount to a higher priority (hopefully)
+        return ((findMisplacedTiles(lhs) + lhs->totalMoves) < (findMisplacedTiles(rhs) + rhs->totalMoves));
     }
-}
+};
 
-void makeChildNodeAndPush(node* x, priority_queue<node*> &Q){
+//make children nodes of potential moves and push them onto priority queue
+void makeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPriorityDeterminer> &Q){
     //provide choices based on x and connect children to parent and parent to children
     //do everything here
     
@@ -331,19 +349,22 @@ void makeChildNodeAndPush(node* x, priority_queue<node*> &Q){
 }
 
 void aStarMisplacedTile(node* &x, node* goal){
-    priority_queue<node*> Q;
+    priority_queue<node*, vector<node*>, customPriorityDeterminer> Q;
     Q.push(x);
+    makeChildNodeAndPush(Q.top(), Q);
+    Q.pop();
+    cout << "Q.size: " << Q.size() << endl;
     
-    while(true){    //iterate forever (breaks out when solution is found)
-        //check if top priority element is equal to goal
-        if(Q.top()->puzzle == goal->puzzle){
-            x = Q.top();
-            return;
-        }
+    // while(true){    //iterate forever (breaks out when solution is found)
+    //     //check if top priority element is equal to goal
+    //     if(Q.top()->puzzle == goal->puzzle){
+    //         x = Q.top();
+    //         return;
+    //     }
         
-        //make children nodes of potential moves and push them onto priority queue
-        makeChildNodeAndPush(x, Q);
-    }
+    //     //make children nodes of potential moves and push them onto priority queue
+    //     makeChildNodeAndPush(x, Q);
+    // }
 }
 
 
