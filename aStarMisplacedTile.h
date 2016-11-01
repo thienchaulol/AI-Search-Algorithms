@@ -29,7 +29,6 @@ int findMisplacedTiles(node* x, node* goal){
 
 int findMin(int w, int x, int y, int z){
 	vector<int> temp;
-	cout << "5" << endl;
 	if(w != 2480){
 		temp.push_back(w);
 	}
@@ -42,14 +41,13 @@ int findMin(int w, int x, int y, int z){
 	if(z != 2480){
 		temp.push_back(z);
 	}
-	cout << "4" << endl;
 	int lowest = temp.front();
 	for(int i = 0; i < temp.size(); i++){
 		if(temp.at(i) < lowest){
 			lowest = temp.at(i);
 		}
 	}
-	cout << "Lowest: " << lowest << endl;
+//	cout << "Lowest: " << lowest << endl;
 	return lowest;
 }
 
@@ -115,7 +113,8 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 
 		displayPuzzle(Q.front());
-		cout << "Q.front()->totalMisplacedTiles: " << Q.front()->totalMisplacedTiles << endl;
+		cout << endl;
+	//	cout << "Q.front()->totalMisplacedTiles: " << Q.front()->totalMisplacedTiles << endl;
 
 		//check if puzzle is solvable
 		if(solvable(Q.front()) == false){
@@ -172,10 +171,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		//add statement from first if statement that checks if heuristic is equal, to all statements
 		if(emptyTileRow == 0 && emptyTileCol == 0 && checkpoint == false){
 			//swapRight node and push onto queue
-			node* temp1;
+			node* temp1 = new node;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp1 = new node;
 					temp1->puzzle = Q.front()->puzzle;
 					swap(temp1->puzzle.at(emptyTileRow).at(emptyTileCol), temp1->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp1;
@@ -187,10 +185,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapBot node and push on to queue
-			node* temp2;
+			node* temp2 = new node;
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp2 = new node;
 					temp2->puzzle = Q.front()->puzzle;
 					swap(temp2->puzzle.at(emptyTileRow).at(emptyTileCol), temp2->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp2;
@@ -218,10 +215,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 1 && checkpoint == false){
 			//swapLeft node and push onto queue
-			node* temp3;
+			node* temp3 = new node;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
-					temp3 = new node;
 					temp3->puzzle = Q.front()->puzzle;
 					swap(temp3->puzzle.at(emptyTileRow).at(emptyTileCol), temp3->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 					Q.front()->swapLeft = temp3;
@@ -233,10 +229,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapRight node and push onto queue
-			node* temp4;
+			node* temp4 = new node;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp4 = new node;
 					temp4->puzzle = Q.front()->puzzle;
 					swap(temp4->puzzle.at(emptyTileRow).at(emptyTileCol), temp4->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp4;
@@ -248,10 +243,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapBot node and push on to queue
-			node* temp5;
+			node* temp5 = new node;
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp5 = new node;
 					temp5->puzzle = Q.front()->puzzle;
 					swap(temp5->puzzle.at(emptyTileRow).at(emptyTileCol), temp5->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp5;
@@ -276,10 +270,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 0 && emptyTileCol == 2 && checkpoint == false){
 			//swapLeft node and push onto queue
-			node* temp6;
+			node* temp6 = new node;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
-					temp6 = new node;
 					temp6->puzzle = Q.front()->puzzle;
 					swap(temp6->puzzle.at(emptyTileRow).at(emptyTileCol), temp6->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 					Q.front()->swapLeft = temp6;
@@ -291,10 +284,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapBot node and push on to queue
-			node* temp7;
+			node* temp7 = new node;
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp7 = new node;
 					temp7->puzzle = Q.front()->puzzle;
 					swap(temp7->puzzle.at(emptyTileRow).at(emptyTileCol), temp7->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp7;
@@ -315,11 +307,10 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 0){
 			//swapTop node and push on to queue
-			node* temp8;
+			node* temp8 = new node;
 			if(checkpoint == false){
 				if(Q.front()->swapMove != "swapBot"){
 					if(!(isRoot && Q.front()->tookTop == true)){
-						temp8 = new node;
 						temp8->puzzle = Q.front()->puzzle;
 						swap(temp8->puzzle.at(emptyTileRow).at(emptyTileCol), temp8->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 						Q.front()->swapTop = temp8;
@@ -332,10 +323,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapBot node and push on to queue
-			node* temp9;
+			node* temp9 = new node;
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp9 = new node;
 					temp9->puzzle = Q.front()->puzzle;
 					swap(temp9->puzzle.at(emptyTileRow).at(emptyTileCol), temp9->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp9;
@@ -347,10 +337,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapRight node and push onto queue
-			node* temp10;
+			node* temp10 = new node;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp10 = new node;
 					temp10->puzzle = Q.front()->puzzle;
 					swap(temp10->puzzle.at(emptyTileRow).at(emptyTileCol), temp10->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp10;
@@ -374,15 +363,14 @@ void aStarMisplacedTile(node* &x, node* goal){
 			}
 		}
 		if(emptyTileRow == 1 && emptyTileCol == 1){
-			node* temp11;
-			node* temp12;
-			node* temp13;
-			node* temp14; 
+			node* temp11 = new node;
+			node* temp12 = new node;
+			node* temp13 = new node;
+			node* temp14 = new node; 
 			//swapTop node and push on to queue
 			if(checkpoint == false){
 				if(Q.front()->swapMove != "swapBot"){
 					if(!(isRoot && Q.front()->tookTop == true)){
-						temp11 = new node;
 						temp11->puzzle = Q.front()->puzzle;
 						swap(temp11->puzzle.at(emptyTileRow).at(emptyTileCol), temp11->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 						Q.front()->swapTop = temp11;
@@ -397,7 +385,6 @@ void aStarMisplacedTile(node* &x, node* goal){
 			//swapBot node and push on to queue
 			if(Q.front()->swapMove != "swapTop"){
 				if(!(isRoot && Q.front()->tookBot == true)){
-					temp12 = new node;
 					temp12->puzzle = Q.front()->puzzle;
 					swap(temp12->puzzle.at(emptyTileRow).at(emptyTileCol), temp12->puzzle.at(emptyTileRow + 1).at(emptyTileCol));
 					Q.front()->swapBot = temp12;
@@ -411,7 +398,6 @@ void aStarMisplacedTile(node* &x, node* goal){
 			//swapRight node and push onto queue
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp13 = new node;
 					temp13->puzzle = Q.front()->puzzle;
 					swap(temp13->puzzle.at(emptyTileRow).at(emptyTileCol), temp13->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp13;
@@ -426,7 +412,6 @@ void aStarMisplacedTile(node* &x, node* goal){
 			if(checkpoint2 == false){
 				if(Q.front()->swapMove != "swapRight"){
 					if(!(isRoot && Q.front()->tookLeft == true)){
-						temp14 = new node;
 						temp14->puzzle = Q.front()->puzzle;
 						swap(temp14->puzzle.at(emptyTileRow).at(emptyTileCol), temp14->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 						Q.front()->swapLeft = temp14;
@@ -454,11 +439,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				Q.push(temp14);
 			}
 		}
-		//initiate all nodes before if statements. memory should be OK
 		if(emptyTileRow == 1 && emptyTileCol == 2){
 			//swapTop node and push on to queue
 			node* temp15 = new node;
-			cout << "0" << endl;
 			if(checkpoint == false){
 				if(Q.front()->swapMove != "swapBot"){
 					if(!(isRoot && Q.front()->tookTop == true)){
@@ -501,9 +484,7 @@ void aStarMisplacedTile(node* &x, node* goal){
 					recordParentDirection(temp17, temp17->swapMove);
 				}
 			}
-			cout << "1" << endl;
 			int value = findMin(temp15->totalMisplacedTiles, temp16->totalMisplacedTiles, temp17->totalMisplacedTiles, 2480);
-			cout << "2" << endl;
 			if(value == temp15->totalMisplacedTiles && checkpoint == false && Q.front()->swapMove != "swapBot"){
 				Q.push(temp15);
 			}			
@@ -516,11 +497,10 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 0){
 			//swapTop node and push on to queue
-			node* temp18;
+			node* temp18 = new node;
 			if(checkpoint2 == false){
 				if(Q.front()->swapMove != "swapBot"){
 					if(!(isRoot && Q.front()->tookTop == true)){
-						temp18 = new node;
 						temp18->puzzle = Q.front()->puzzle;
 						swap(temp18->puzzle.at(emptyTileRow).at(emptyTileCol), temp18->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 						Q.front()->swapTop = temp18;
@@ -533,10 +513,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapRight node and push onto queue
-			node* temp19;
+			node* temp19 = new node;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp19 = new node;
 					temp19->puzzle = Q.front()->puzzle;
 					swap(temp19->puzzle.at(emptyTileRow).at(emptyTileCol), temp19->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp19;
@@ -558,10 +537,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 1){
 			//swapTop node and push on to queue
-			node* temp20;
+			node* temp20 = new node;
 			if(Q.front()->swapMove != "swapBot"){
 				if(!(isRoot && Q.front()->tookTop == true)){
-					temp20 = new node;
 					temp20->puzzle = Q.front()->puzzle;
 					swap(temp20->puzzle.at(emptyTileRow).at(emptyTileCol), temp20->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 					Q.front()->swapTop = temp20;
@@ -573,10 +551,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapRight node and push onto queue
-			node* temp21;
+			node* temp21 = new node;
 			if(Q.front()->swapMove != "swapLeft"){
 				if(!(isRoot && Q.front()->tookRight == true)){
-					temp21 = new node;
 					temp21->puzzle = Q.front()->puzzle;
 					swap(temp21->puzzle.at(emptyTileRow).at(emptyTileCol), temp21->puzzle.at(emptyTileRow).at(emptyTileCol + 1));
 					Q.front()->swapRight = temp21;
@@ -588,11 +565,10 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapLeft node and push onto queue
-			node* temp22;
+			node* temp22 = new node;
 			if(checkpoint3 == false){
 				if(Q.front()->swapMove != "swapRight"){
 					if(!(isRoot && Q.front()->tookLeft == true)){
-						temp22 = new node;
 						temp22->puzzle = Q.front()->puzzle;
 						swap(temp22->puzzle.at(emptyTileRow).at(emptyTileCol), temp22->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 						Q.front()->swapLeft = temp22;
@@ -619,10 +595,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 		}
 		if(emptyTileRow == 2 && emptyTileCol == 2){
 			//swapLeft node and push onto queue
-			node* temp23;
+			node* temp23 = new node;
 			if(Q.front()->swapMove != "swapRight"){
 				if(!(isRoot && Q.front()->tookLeft == true)){
-					temp23 = new node;
 					temp23->puzzle = Q.front()->puzzle;
 					swap(temp23->puzzle.at(emptyTileRow).at(emptyTileCol), temp23->puzzle.at(emptyTileRow).at(emptyTileCol - 1));
 					Q.front()->swapLeft = temp23;
@@ -634,10 +609,9 @@ void aStarMisplacedTile(node* &x, node* goal){
 				}
 			}
 			//swapTop node and push on to queue
-			node* temp24;
+			node* temp24 = new node;
 			if(Q.front()->swapMove != "swapBot"){
 				if(!(isRoot && Q.front()->tookTop == true)){
-					temp24 = new node;
 					temp24->puzzle = Q.front()->puzzle;
 					swap(temp24->puzzle.at(emptyTileRow).at(emptyTileCol), temp24->puzzle.at(emptyTileRow - 1).at(emptyTileCol));
 					Q.front()->swapTop = temp24;
