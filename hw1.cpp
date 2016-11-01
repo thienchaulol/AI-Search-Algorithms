@@ -7,10 +7,10 @@
 
 #include "UCS.h"
 #include "aStarMisplacedTile.h"
-// #include "aStarManhattan.h"
+#include "aStarManhattan.h"
 #include "treeNode.h"
 	
-using namespace std;;
+using namespace std;
 
 int main(){
 	
@@ -91,14 +91,14 @@ int main(){
 	//algorithm selection
 	userChoice = 0;
 	cout << "Enter your choice of algorithm\n";
-	cout << "\t1. Uniform Cost Search\n";
-	cout << "\t2. A* with the Misplaced Tile Heuristic\n";
-	cout << "\t3. A* with the Manhattan distance heuristic\n";
+	cout << "\t1. Uniform Cost Search || 'f(n) = 0'\n";
+	cout << "\t2. A* with the Misplaced Tile Heuristic || 'f(n) = g(n) + h(n)' where g(n) is the cost to get to the node and h(n) is the # of misplaced tiles\n";
+	cout << "\t3. A* with the Manhattan distance heuristic || 'f(n) = g(n) + h(n)' where g(n) is the cost to get to the node and h(n) is the manhattan distance\n";
 	cin >> userChoice;
 
 	if(userChoice == 1) uniformCostSearch(n, goalNode); //perform Uniform Cost Search on root node n
 	if(userChoice == 2) aStarMisplacedTile(n, goalNode); //perform A* with the Misplaced Tile Heuristic on root node n
-//	if(userChoice == 3) aStarManhattan(n, goalNode); //perform A* with the Manhattan distance heuristic on root node n
+	if(userChoice == 3) aStarManhattan(n, goalNode); //perform A* with the Manhattan distance heuristic on root node n
 
 	//display solution
 	displayPath(n);

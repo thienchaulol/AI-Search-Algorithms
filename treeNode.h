@@ -39,7 +39,6 @@ struct node{
 	int totalMoves = 0;
 };
 
-
 //set goal puzzle
 vector< vector<double> > setGoal(vector< vector<double> > x){
 	int k = 0;
@@ -73,7 +72,7 @@ void displayPath(node* x){
 			displayVector.push_back(x->parent);	//x->parent is NULL
 			x = x->parent;
 		} else {
-			cout << "Finished storing path into display vector" << endl;
+		//	cout << "Finished storing path into display vector" << endl;
 			break;
 		}
 		

@@ -36,7 +36,7 @@ int findMisplacedTiles(node* x){
 }
 
 //custom priority determiner for priority queue of node*
-struct customPriorityDeterminer{
+struct customPriorityDeterminerMPT{
     bool operator()(node* &lhs, node* &rhs){    //suppose to be: bool operator()(const node* &lhs, node* &rhs) const{
         //(findMisplacedTiles(lhs) + lhs->totalMoves) is the f(n) = g(n) + h(n)
         //sets the value with the lower ( < ) amount to a higher priority (hopefully)
@@ -45,7 +45,7 @@ struct customPriorityDeterminer{
 };
 
 //make children nodes of potential moves and push them onto priority queue
-void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPriorityDeterminer> &Q){
+void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPriorityDeterminerMPT> &Q){
     //provide choices based on x and connect children to parent and parent to children
     //do "everything" here
     
@@ -354,19 +354,8 @@ void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>,
 }
 
 void aStarMisplacedTile(node* &x, node* goal){
-    priority_queue<node*, vector<node*>, customPriorityDeterminer> Q;
+    priority_queue<node*, vector<node*>, customPriorityDeterminerMPT> Q;
     Q.push(x);  //push root
-    
-    // //pop parent off and push it's children
-    // PopParentMakeChildNodeAndPush(Q.top(), Q);
-    // cout << "Q.top()->puzzle: " << endl;
-    // displayPuzzle(Q.top());
-    
-    // //pop parent off and push it's children
-    // PopParentMakeChildNodeAndPush(Q.top(), Q);
-    // cout << "Q.top()->puzzle: " << endl;
-    // displayPuzzle(Q.top());
-    
     
     while(true){    //iterate forever (breaks out when solution is found)
         //check if top priority element is equal to goal
