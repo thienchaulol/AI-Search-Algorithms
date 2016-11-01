@@ -15,6 +15,17 @@
 int numRow = 3;
 int numCol = 3;
 
+//total number of nodes expanded by algorithm
+int totalNodesExpanded = 0;
+
+//maximum number of nodes in queue during algorithm
+int maxNumOfNodesInQueue = 0;
+
+//depth of goal node
+int depthOfGoalNode = 0;
+
+//CHANGING GOAL STATE: HARDCODE setGoal() to new goal state. OR make function to input new goal state
+
 using namespace std;
 
 //nodes of puzzle states
