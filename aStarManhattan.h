@@ -1,3 +1,9 @@
+// =====HEADER=====
+// CS 170 Individual Project 1
+// Name: Thien Chau
+// SID: 861145164
+// Discussion Section: 021
+// =====HEADER=====
 #ifndef ASTARMANHATTAN_H_INCLUDED
 #define ASTARMANHATTAN_H_INCLUDED
 
