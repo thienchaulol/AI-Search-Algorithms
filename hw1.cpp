@@ -113,7 +113,7 @@ int main(){
 
 	//display solution
 	displayPath(n);
-	cout << endl << "Total nodes expanded: " << totalNodesExpanded << endl;
+	cout << endl << "Total nodes expanded(total nodes created): " << totalNodesExpanded + 1 /*+ 1 for parent node*/<< endl;
 	cout << "Depth of solution: " << n->totalMoves << endl;
 	cout << "Max number of nodes in queue:: " << maxNumOfNodesInQueue << endl;
 	return 0;
