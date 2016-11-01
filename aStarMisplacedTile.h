@@ -40,14 +40,19 @@ struct customPriorityDeterminer{
     bool operator()(node* &lhs, node* &rhs){    //suppose to be: bool operator()(const node* &lhs, node* &rhs) const{
         //(findMisplacedTiles(lhs) + lhs->totalMoves) is the f(n) = g(n) + h(n)
         //sets the value with the lower ( < ) amount to a higher priority (hopefully)
-        return ((findMisplacedTiles(lhs) + lhs->totalMoves) < (findMisplacedTiles(rhs) + rhs->totalMoves));
+        return ((findMisplacedTiles(lhs) + lhs->totalMoves) > (findMisplacedTiles(rhs) + rhs->totalMoves));
     }
 };
 
 //make children nodes of potential moves and push them onto priority queue
-void makeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPriorityDeterminer> &Q){
+void PopParentMakeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPriorityDeterminer> &Q){
     //provide choices based on x and connect children to parent and parent to children
-    //do everything here
+    //do "everything" here
+    
+    //pop node with highest priority off of the queue, and push it's children
+    node* parent = x;   //store pointer to x in parent
+    Q.pop();    //pop Q.top() which is x
+    x = parent; //set x to parent
     
     //find where empty tile is
     int emptyTileCol;
@@ -350,22 +355,30 @@ void makeChildNodeAndPush(node* x, priority_queue<node*, vector<node*>, customPr
 
 void aStarMisplacedTile(node* &x, node* goal){
     priority_queue<node*, vector<node*>, customPriorityDeterminer> Q;
-    Q.push(x);
-    makeChildNodeAndPush(Q.top(), Q);
-    Q.pop();
-    cout << "Q.size: " << Q.size() << endl;
+    Q.push(x);  //push root
     
-    // while(true){    //iterate forever (breaks out when solution is found)
-    //     //check if top priority element is equal to goal
-    //     if(Q.top()->puzzle == goal->puzzle){
-    //         x = Q.top();
-    //         return;
-    //     }
+    // //pop parent off and push it's children
+    // PopParentMakeChildNodeAndPush(Q.top(), Q);
+    // cout << "Q.top()->puzzle: " << endl;
+    // displayPuzzle(Q.top());
+    
+    // //pop parent off and push it's children
+    // PopParentMakeChildNodeAndPush(Q.top(), Q);
+    // cout << "Q.top()->puzzle: " << endl;
+    // displayPuzzle(Q.top());
+    
+    
+    while(true){    //iterate forever (breaks out when solution is found)
+        //check if top priority element is equal to goal
+        if(Q.top()->puzzle == goal->puzzle){
+            cout << "Solution found; return" << endl;
+            x = Q.top();
+            return;
+        }
         
-    //     //make children nodes of potential moves and push them onto priority queue
-    //     makeChildNodeAndPush(x, Q);
-    // }
+        //pop parent off and push it's children
+        PopParentMakeChildNodeAndPush(Q.top(), Q);
+    }
 }
-
 
 #endif
